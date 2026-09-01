@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Fábrica de Chocolate - Wonka</title>
+    <meta name="description" content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <script src="scripts/hide-on-play.js"></script>
+    <script src="scripts/play-on-click.js"></script>
+    <script src="scripts/remix-dropdown.js"></script>
+
+    <!-- Controles del video -->
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/play-on-click.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/hide-on-play.js"></script>
+</head>
+
+
+<body>
+
+    <a-scene>
+
+        <!-- ==================== RECURSOS ==================== -->
+        <a-assets>
+
+            <!-- Video 360 -->
+            <video
+                id="video" 
+                preload="auto"
+                src="video/video360.mp4"
+                autoplay loop="true"
+                crossOrigin="anonymous">
+            </video>
+
+        </a-assets>
+
+
+        <!-- ==================== VIDEO 360 ==================== -->
+        <a-videosphere
+            rotation="0 -90 0"
+            src="#video"
+            visible="false"
+            play-on-click>
+        </a-videosphere>
+
+
+        <!-- ==================== TERRENO ==================== -->
+        <a-plane
+            position="0 0 0"
+            rotation="-90 0 0"
+            width="20"
+            height="20"
+            color="#8B6B4A">
+        </a-plane>
+
+
+        <!-- ==================== CAMARA ==================== -->
+        <a-camera
+            position="0 1.6 0">
+
+            <!-- Mensaje inicial -->
+            <a-entity
+                position="0 0 -1.5"
+                text="
+                    align: center;
+                    width: 6;
+                    wrapCount: 100;
+                    color: black;
+                    value: Click o toca para comenzar
+                "
+                hide-on-play="#video">
+            </a-entity>
+
+        </a-camera>
+
+
+    </a-scene>
+
+</body>
+
+</html>
