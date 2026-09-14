@@ -1,4 +1,59 @@
-lo: 'DULCES DE CAFÉ · TOSTAO'
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Fábrica de Chocolate - Wonka</title>
+    <meta
+      
+name="GASRTRONOMIA_WONKA"
+content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
+
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+    <script>
+
+        AFRAME.registerComponent('infografia-ui', {
+
+            init: function () {
+
+
+               const buttons = [
+
+                    document.querySelector('#elinkaButton'),
+
+                    document.querySelector('#tostaoButton'),
+
+                    document.querySelector('#nuevaButton')
+
+                ];
+
+
+                const infoPanel = document.querySelector('#infoPanel');
+
+                const infoImage = document.querySelector('#infoImage');
+
+                const infoTitle = document.querySelector('#infoTitle');
+
+                const closeButton = document.querySelector('#closeButton');
+
+
+
+                const infografias = [
+
+                    {
+
+                        imagen: '#elinka',
+
+                        titulo: 'DULCES DE MENTA · ELLINIKA'
+
+                    },
+
+
+                    {
+
+                        imagen: '#tostao',
+
+                        titulo: 'DULCES DE CAFÉ · TOSTAO'
 
                     },
 
@@ -18,14 +73,10 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
 
 
 
-
-
                 buttons.forEach((button, index) => {
 
 
-
                     button.addEventListener('click', function () {
-
 
 
                         infoImage.setAttribute(
@@ -64,14 +115,10 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
 
 
 
-
-
                 closeButton.addEventListener('click', function () {
 
 
-
                     infoPanel.setAttribute('visible', false);
-
 
 
                 });
@@ -84,20 +131,14 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
 
         });
 
-
-
     </script>
-
 
 
 </head>
 
 
 
-
-
 <body>
-
 
 
     <a-scene
@@ -110,16 +151,6 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
 
 
 
-
-
-        <!-- ================================================= -->
-
-        <!-- RECURSOS -->
-
-        <!-- ================================================= -->
-
-
-
         <a-assets>
 
 
@@ -127,15 +158,9 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
             <!-- ESCENARIO 360 -->
 
 
-
-            <img
-
-                id="escenario360"
-
-                src="imagenes/escenario360.jpg"
-
-                crossorigin="anonymous">
-
+        <!-- Video 360 -->
+          <video id="video" preload="auto" src="video/video360.mp4" autoplay loop crossorigin="anonymous"> </video>
+      <!-- ==================== VIDEO 360 ==================== --> <a-videosphere rotation="0 -90 0" src="#video" visible="false" play-on-click> </a-videosphere>
 
 
 
@@ -207,7 +232,6 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
 
 
 
-
         <!-- ================================================= -->
 
         <!-- ESCENARIO 360 -->
@@ -223,7 +247,6 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
             rotation="0 -130 0">
 
         </a-sky>
-
 
 
 
@@ -547,15 +570,10 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
                 </a-text>
 
 
-
             </a-entity>
 
 
-
         </a-entity>
-
-
-
 
 
         <!-- ================================================= -->
@@ -565,7 +583,6 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
         <!-- ================================================= -->
 
 
-
         <a-camera
 
             position="0 1.6 0">
@@ -573,15 +590,11 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
         </a-camera>
 
 
-
-
-
         <!-- ================================================= -->
 
         <!-- CONTROLES VR -->
 
         <!-- ================================================= -->
-
 
 
         <a-entity
@@ -593,7 +606,6 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
             raycaster="objects: .raycastable">
 
         </a-entity>
-
 
 
 
@@ -611,16 +623,12 @@ lo: 'DULCES DE CAFÉ · TOSTAO'
         </a-entity>
 
 
-
-
-
     </a-scene>
-
 
 
 </body>
 
 
-
 </html> 
+
 
