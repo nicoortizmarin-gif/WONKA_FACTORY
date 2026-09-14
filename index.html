@@ -56,7 +56,7 @@
 
 
                 /* =========================
-                   INFORMACIÓN
+                   DATOS
                 ========================= */
 
                 const infografias = {
@@ -80,7 +80,7 @@
 
 
                 /* =========================
-                   FUNCIÓN PARA ABRIR
+                   ABRIR INFOGRAFÍA
                 ========================= */
 
                 function abrirInfografia(datos) {
@@ -106,7 +106,7 @@
 
 
                 /* =========================
-                   BOTONES
+                   ELLINIKA
                 ========================= */
 
                 elinkaButton.addEventListener('click', function () {
@@ -118,6 +118,10 @@
                 });
 
 
+                /* =========================
+                   TOSTAO
+                ========================= */
+
                 tostaoButton.addEventListener('click', function () {
 
                     abrirInfografia(
@@ -126,6 +130,10 @@
 
                 });
 
+
+                /* =========================
+                   NUEVA FELICIDAD
+                ========================= */
 
                 nuevaButton.addEventListener('click', function () {
 
@@ -219,70 +227,13 @@
                 src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
                 crossorigin="anonymous">
 
-            <a-entity
-    id="elinkaButton"
-    class="raycastable"
-
-    geometry="
-        primitive: plane;
-        width: 1.4;
-        height: 1.9;
-    "
-
-    material="
-        shader: flat;
-        src: #elinka;
-    "
-
-    position="-1.8 0 0"
-    rotation="0 -15 0">
-</a-entity>
-
-            <a-entity
-    id="tostaoButton"
-    class="raycastable"
-
-    geometry="
-        primitive: plane;
-        width: 1.4;
-        height: 1.9;
-    "
-
-    material="
-        shader: flat;
-        src: #tostao;
-    "
-
-    position="0 0 0"
-    rotation="0 -15 0">
-</a-entity>
-
-            <a-entity
-    id="tostaoButton"
-    class="raycastable"
-
-    geometry="
-        primitive: plane;
-        width: 1.4;
-        height: 1.9;
-    "
-
-    material="
-        shader: flat;
-        src: #tostao;
-    "
-
-    position="0 0 0"
-    rotation="0 -15 0">
-</a-entity>
-
 
         </a-assets>
 
 
 
         <!-- ================================================= -->
-        <!-- ESCENARIO 360 -->
+        <!-- VIDEO 360 -->
         <!-- ================================================= -->
 
         <a-videosphere
@@ -322,7 +273,7 @@
                 align="center"
                 width="5"
                 color="white"
-                position="0 1.1 0">
+                position="0 1.3 0">
             </a-text>
 
 
@@ -332,13 +283,15 @@
             <!-- ================================================= -->
 
             <a-entity
+
                 id="elinkaButton"
+
                 class="raycastable"
 
                 geometry="
                     primitive: plane;
-                    width: 1;
-                    height: 1.45;
+                    width: 1.4;
+                    height: 1.9;
                 "
 
                 material="
@@ -346,7 +299,9 @@
                     src: #elinka;
                 "
 
-                position="-1.2 0 0"
+                position="-2 0 0"
+
+                rotation="0 -35 0"
 
 
                 animation__mouseenter="
@@ -373,13 +328,15 @@
             <!-- ================================================= -->
 
             <a-entity
+
                 id="tostaoButton"
+
                 class="raycastable"
 
                 geometry="
                     primitive: plane;
-                    width: 1;
-                    height: 1.45;
+                    width: 1.4;
+                    height: 1.9;
                 "
 
                 material="
@@ -388,6 +345,8 @@
                 "
 
                 position="0 0 0"
+
+                rotation="0 -35 0"
 
 
                 animation__mouseenter="
@@ -414,13 +373,15 @@
             <!-- ================================================= -->
 
             <a-entity
+
                 id="nuevaButton"
+
                 class="raycastable"
 
                 geometry="
                     primitive: plane;
-                    width: 1;
-                    height: 1.45;
+                    width: 1.4;
+                    height: 1.9;
                 "
 
                 material="
@@ -428,7 +389,9 @@
                     src: #nueva;
                 "
 
-                position="1.2 0 0"
+                position="2 0 0"
+
+                rotation="0 -35 0"
 
 
                 animation__mouseenter="
@@ -458,14 +421,18 @@
         <!-- ================================================= -->
 
         <a-entity
+
             id="infoPanel"
+
             visible="false"
+
             position="0 1.6 -2">
 
 
             <!-- ==================== FONDO ==================== -->
 
             <a-plane
+
                 width="3.3"
                 height="2.8"
 
@@ -474,6 +441,7 @@
                     shader: flat;
                     opacity: 0.97;
                 ">
+
             </a-plane>
 
 
@@ -481,6 +449,7 @@
             <!-- ==================== INFOGRAFÍA ==================== -->
 
             <a-plane
+
                 id="infoImage"
 
                 position="0 0 0.03"
@@ -492,6 +461,7 @@
                     shader: flat;
                     src: #elinka;
                 ">
+
             </a-plane>
 
 
@@ -499,6 +469,7 @@
             <!-- ==================== TÍTULO ==================== -->
 
             <a-text
+
                 id="infoTitle"
 
                 value="INFOGRAFÍA"
@@ -510,6 +481,7 @@
                 color="white"
 
                 position="0 -1.18 0.04">
+
             </a-text>
 
 
@@ -517,6 +489,7 @@
             <!-- ==================== BOTÓN CERRAR ==================== -->
 
             <a-entity
+
                 id="closeButton"
 
                 class="raycastable"
@@ -535,11 +508,17 @@
 
 
                 <a-text
+
                     value="X"
+
                     align="center"
+
                     width="2"
+
                     color="white"
+
                     position="0 0 0.01">
+
                 </a-text>
 
 
@@ -555,7 +534,9 @@
         <!-- ================================================= -->
 
         <a-camera
+
             position="0 1.6 0">
+
         </a-camera>
 
 
@@ -565,6 +546,7 @@
         <!-- ================================================= -->
 
         <a-entity
+
             id="leftHand"
 
             laser-controls="hand: left"
@@ -572,6 +554,7 @@
             raycaster="
                 objects: .raycastable;
             ">
+
         </a-entity>
 
 
@@ -581,6 +564,7 @@
         <!-- ================================================= -->
 
         <a-entity
+
             id="rightHand"
 
             laser-controls="hand: right"
@@ -592,6 +576,7 @@
             line="
                 color: #118A7E;
             ">
+
         </a-entity>
 
 
