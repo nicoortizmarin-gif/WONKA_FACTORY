@@ -5,83 +5,81 @@
     <meta charset="utf-8">
 
     <title>Fábrica de Chocolate - Wonka</title>
-    <meta name="description" content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
+    <meta
+        name="description"
+        content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
 
-    <!-- A-Frame -->
+    <!-- ==================== A-FRAME ==================== -->
     <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
-    <!-- Controles del video -->
-    <script src="scripts/play-on-click.js"></script>
-    <script src="scripts/hide-on-play.js"></script>
 
-    <!-- ========================================= -->
-    <!-- COMPONENTE PARA ABRIR/CERRAR INFOGRAFÍAS -->
-    <!-- ========================================= -->
+    <!-- ==================== INTERFAZ ==================== -->
     <script>
 
         AFRAME.registerComponent('infografia-ui', {
 
             init: function () {
 
-                this.buttons = [
+                const buttons = [
                     document.querySelector('#elinkaButton'),
                     document.querySelector('#tostaoButton'),
                     document.querySelector('#nuevaButton')
                 ];
 
-                this.infoPanel = document.querySelector('#infoPanel');
-                this.infoImage = document.querySelector('#infoImage');
-                this.infoTitle = document.querySelector('#infoTitle');
-                this.closeButton = document.querySelector('#closeButton');
+                const infoPanel = document.querySelector('#infoPanel');
+                const infoImage = document.querySelector('#infoImage');
+                const infoTitle = document.querySelector('#infoTitle');
+                const closeButton = document.querySelector('#closeButton');
 
-                this.data = [
+
+                const infografias = [
+
                     {
-                        image: '#elinka',
-                        title: 'DULCES DE MENTA · ELLINIKA'
+                        imagen: '#elinka',
+                        titulo: 'DULCES DE MENTA · ELLINIKA'
                     },
+
                     {
-                        image: '#tostao',
-                        title: 'DULCES DE CAFÉ · TOSTAO'
+                        imagen: '#tostao',
+                        titulo: 'DULCES DE CAFÉ · TOSTAO'
                     },
+
                     {
-                        image: '#nueva',
-                        title: 'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
+                        imagen: '#nueva',
+                        titulo: 'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
                     }
+
                 ];
 
-                this.buttons.forEach((button, index) => {
 
-                    button.addEventListener('click', () => {
-                        this.open(index);
+                buttons.forEach((button, index) => {
+
+                    button.addEventListener('click', function () {
+
+                        infoImage.setAttribute(
+                            'material',
+                            'src',
+                            infografias[index].imagen
+                        );
+
+                        infoTitle.setAttribute(
+                            'text',
+                            'value',
+                            infografias[index].titulo
+                        );
+
+                        infoPanel.setAttribute('visible', true);
+
                     });
 
                 });
 
-                this.closeButton.addEventListener('click', () => {
-                    this.close();
+
+                closeButton.addEventListener('click', function () {
+
+                    infoPanel.setAttribute('visible', false);
+
                 });
-
-            },
-
-            open: function (index) {
-
-                this.infoImage.setAttribute(
-                    'material',
-                    'src: ' + this.data[index].image
-                );
-
-                this.infoTitle.setAttribute(
-                    'text',
-                    'value: ' + this.data[index].title
-                );
-
-                this.infoPanel.setAttribute('visible', true);
-
-            },
-
-            close: function () {
-
-                this.infoPanel.setAttribute('visible', false);
 
             }
 
@@ -96,46 +94,49 @@
 
     <a-scene
         infografia-ui
-        background="color: #111"
         cursor="rayOrigin: mouse; fuse: false"
         raycaster="objects: .raycastable">
 
 
-        <!-- ========================================= -->
+        <!-- ================================================= -->
         <!-- RECURSOS -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
 
         <a-assets>
 
-            <!-- VIDEO 360 -->
-            <video
-                id="video"
-                preload="auto"
-                src="video/video360.mp4"
-                autoplay
-                loop
+            <!-- ESCENARIO 360 -->
+
+            <img
+                id="escenario360"
+                src="imagenes/escenario360.jpg"
                 crossorigin="anonymous">
-            </video>
 
 
             <!-- MODELO 3D -->
+
             <a-asset-item
                 id="puesto-wonka"
                 src="modelos/PUESTO_WONKA_3D_FINAL_.glb">
             </a-asset-item>
 
 
-            <!-- INFOGRAFÍAS -->
+            <!-- INFOGRAFÍA ELLINIKA -->
 
             <img
                 id="elinka"
                 src="infografias/INFOGRAFIA ELINKA_.png"
                 crossorigin="anonymous">
 
+
+            <!-- INFOGRAFÍA TOSTAO -->
+
             <img
                 id="tostao"
                 src="infografias/INFOGRAFIA TOSTAO_.png"
                 crossorigin="anonymous">
+
+
+            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
 
             <img
                 id="nueva"
@@ -145,21 +146,19 @@
         </a-assets>
 
 
-        <!-- ========================================= -->
-        <!-- VIDEO 360 -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
+        <!-- ESCENARIO 360 -->
+        <!-- ================================================= -->
 
-        <a-videosphere
-            rotation="0 -90 0"
-            src="#video"
-            visible="false"
-            play-on-click>
-        </a-videosphere>
+        <a-sky
+            src="#escenario360"
+            rotation="0 -130 0">
+        </a-sky>
 
 
-        <!-- ========================================= -->
+        <!-- ================================================= -->
         <!-- PUESTO WONKA 3D -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
 
         <a-entity
             gltf-model="#puesto-wonka"
@@ -169,115 +168,88 @@
         </a-entity>
 
 
-        <!-- ========================================= -->
+        <!-- ================================================= -->
         <!-- MENÚ DE INFOGRAFÍAS -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
 
         <a-entity
             id="ui"
             position="0 1.7 -2.7">
 
+
             <!-- TÍTULO -->
-            <a-entity
-                position="0 0.8 0"
-                text="
-                    value: SABORES DE LA FÁBRICA;
-                    align: center;
-                    width: 5;
-                    color: white;
-                ">
-            </a-entity>
+
+            <a-text
+                value="SABORES DE LA FÁBRICA"
+                align="center"
+                width="5"
+                color="white"
+                position="0 0.9 0">
+            </a-text>
 
 
-            <!-- =============================== -->
-            <!-- INFOGRAFÍA ELLINIKA -->
-            <!-- =============================== -->
+            <!-- ================= ELLINIKA ================= -->
 
             <a-entity
                 id="elinkaButton"
                 class="raycastable"
-                geometry="primitive: plane; width: 1.1; height: 1.55"
+                geometry="
+                    primitive: plane;
+                    width: 1.1;
+                    height: 1.55;
+                "
                 material="
-                    src: #elinka;
                     shader: flat;
+                    src: #elinka;
                 "
-                position="-1.2 0 0"
-                animation__mouseenter="
-                    property: scale;
-                    to: 1.1 1.1 1.1;
-                    dur: 200;
-                    startEvents: mouseenter;
-                "
-                animation__mouseleave="
-                    property: scale;
-                    to: 1 1 1;
-                    dur: 200;
-                    startEvents: mouseleave;
-                ">
+                position="-1.2 0 0">
+
             </a-entity>
 
 
-            <!-- =============================== -->
-            <!-- INFOGRAFÍA TOSTAO -->
-            <!-- =============================== -->
+            <!-- ================= TOSTAO ================= -->
 
             <a-entity
                 id="tostaoButton"
                 class="raycastable"
-                geometry="primitive: plane; width: 1.1; height: 1.55"
+                geometry="
+                    primitive: plane;
+                    width: 1.1;
+                    height: 1.55;
+                "
                 material="
-                    src: #tostao;
                     shader: flat;
+                    src: #tostao;
                 "
-                position="0 0 0"
-                animation__mouseenter="
-                    property: scale;
-                    to: 1.1 1.1 1.1;
-                    dur: 200;
-                    startEvents: mouseenter;
-                "
-                animation__mouseleave="
-                    property: scale;
-                    to: 1 1 1;
-                    dur: 200;
-                    startEvents: mouseleave;
-                ">
+                position="0 0 0">
+
             </a-entity>
 
 
-            <!-- =============================== -->
-            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
-            <!-- =============================== -->
+            <!-- ============== NUEVA FELICIDAD ============== -->
 
             <a-entity
                 id="nuevaButton"
                 class="raycastable"
-                geometry="primitive: plane; width: 1.1; height: 1.55"
+                geometry="
+                    primitive: plane;
+                    width: 1.1;
+                    height: 1.55;
+                "
                 material="
-                    src: #nueva;
                     shader: flat;
+                    src: #nueva;
                 "
-                position="1.2 0 0"
-                animation__mouseenter="
-                    property: scale;
-                    to: 1.1 1.1 1.1;
-                    dur: 200;
-                    startEvents: mouseenter;
-                "
-                animation__mouseleave="
-                    property: scale;
-                    to: 1 1 1;
-                    dur: 200;
-                    startEvents: mouseleave;
-                ">
+                position="1.2 0 0">
+
             </a-entity>
 
         </a-entity>
 
 
-        <!-- ========================================= -->
-        <!-- PANEL GRANDE DE INFOGRAFÍA -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
+        <!-- PANEL DE INFOGRAFÍA -->
+        <!-- ================================================= -->
 
         <a-entity
             id="infoPanel"
@@ -286,15 +258,17 @@
 
 
             <!-- FONDO -->
+
             <a-plane
                 width="2.9"
                 height="2.2"
-                color="#222"
+                color="#222222"
                 opacity="0.96">
             </a-plane>
 
 
             <!-- IMAGEN -->
+
             <a-plane
                 id="infoImage"
                 position="0 0 0.02"
@@ -307,20 +281,20 @@
             </a-plane>
 
 
-            <!-- TÍTULO -->
-            <a-entity
+            <!-- TITULO -->
+
+            <a-text
                 id="infoTitle"
-                position="0 -1 0.03"
-                text="
-                    value: INFOGRAFÍA;
-                    align: center;
-                    width: 3;
-                    color: white;
-                ">
-            </a-entity>
+                value="INFOGRAFÍA"
+                align="center"
+                width="3"
+                color="white"
+                position="0 -1 0.03">
+            </a-text>
 
 
             <!-- BOTÓN CERRAR -->
+
             <a-entity
                 id="closeButton"
                 class="raycastable"
@@ -331,53 +305,41 @@
                     height: 0.35;
                 "
                 material="
-                    color: #C0392B;
                     shader: flat;
-                "
-                text="
-                    value: X;
-                    align: center;
-                    width: 2;
-                    color: white;
+                    color: #C0392B;
                 ">
+
+                <a-text
+                    value="X"
+                    align="center"
+                    width="2"
+                    color="white">
+                </a-text>
+
             </a-entity>
 
         </a-entity>
 
 
-        <!-- ========================================= -->
+        <!-- ================================================= -->
         <!-- CÁMARA -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
 
         <a-camera
             position="0 1.6 0">
-
-            <!-- MENSAJE INICIAL -->
-
-            <a-entity
-                position="0 0 -1.5"
-                text="
-                    align: center;
-                    width: 6;
-                    wrapCount: 100;
-                    color: white;
-                    value: Click o toca para comenzar;
-                "
-                hide-on-play="#video">
-            </a-entity>
-
         </a-camera>
 
 
-        <!-- ========================================= -->
-        <!-- CONTROLADORES VR -->
-        <!-- ========================================= -->
+        <!-- ================================================= -->
+        <!-- CONTROLES VR -->
+        <!-- ================================================= -->
 
         <a-entity
             id="leftHand"
             laser-controls="hand: left"
             raycaster="objects: .raycastable">
         </a-entity>
+
 
         <a-entity
             id="rightHand"
