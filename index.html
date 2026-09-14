@@ -1,68 +1,86 @@
-<!DOCTYPE html> <html lang="es"> <head> <meta charset="utf-8">
-<title>Fábrica de Chocolate - Wonka</title>
-<meta name="description" content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
+<!DOCTYPE html>
+<html lang="es">
 
-<!-- A-Frame -->
-<script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
-<script src="scripts/hide-on-play.js"></script>
-<script src="scripts/play-on-click.js"></script>
-<script src="scripts/remix-dropdown.js"></script>
+<head>
+    <meta charset="utf-8">
 
-<!-- Controles del video -->
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/play-on-click.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/hide-on-play.js"></script> 
-</head> <body>
-<a-scene> 
+    <title>Fábrica de Chocolate - Wonka</title>
+    <meta name="description" content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
 
-    <!-- ==================== RECURSOS ==================== --> 
-    <a-assets> 
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
-        <!-- Video 360 --> 
-        <video 
-            id="video"  
-            preload="auto" 
-            src="video/video360.mp4" 
-            autoplay loop="true" 
-            crossOrigin="anonymous"> 
-        </video> 
+    <!-- Controles del video -->
+    <script src="scripts/play-on-click.js"></script>
+    <script src="scripts/hide-on-play.js"></script>
 
-    </a-assets> 
+</head>
 
+<body>
 
-    <!-- ==================== VIDEO 360 ==================== --> 
-    <a-videosphere 
-        rotation="0 -90 0" 
-        src="#video" 
-        visible="false" 
-        play-on-click> 
-    </a-videosphere> 
+    <a-scene>
 
-    <!-- ==================== PUESTO WONKA 3D ==================== --> 
-    <a-entity 
-        gltf-model="#"PUESTO_WONKA_3D.glb             
-        position="0 0 -3" 
-        rotation="0 0 0" 
-        scale="1 1 1"> 
-    </a-entity> 
+        <!-- ==================== RECURSOS ==================== -->
+        <a-assets>
 
-    <!-- ==================== CAMARA ==================== --> 
-    <a-camera 
-        position="0 1.6 0"> 
+            <!-- Video 360 -->
+            <video
+                id="video"
+                preload="auto"
+                src="video/video360.mp4"
+                autoplay
+                loop
+                crossorigin="anonymous">
+            </video>
 
-        <!-- Mensaje inicial --> 
-        <a-entity 
-            position="0 0 -1.5" 
-            text=" 
-                align: center; 
-                width: 6; 
-                wrapCount: 100; 
-                color: black; 
-                value: Click o toca para comenzar 
-            " 
-            hide-on-play="#video"> 
-        </a-entity> 
+            <!-- Modelo 3D -->
+            <a-asset-item
+                id="puesto-wonka"
+                src="modelos/PUESTO_WONKA_3D.glb">
+            </a-asset-item>
 
-    </a-camera> 
+        </a-assets>
 
 
-</a-scene> 
+        <!-- ==================== VIDEO 360 ==================== -->
+        <a-videosphere
+            rotation="0 -90 0"
+            src="#video"
+            visible="false"
+            play-on-click>
+        </a-videosphere>
+
+
+        <!-- ==================== PUESTO WONKA 3D ==================== -->
+        <a-entity
+            gltf-model="#puesto-wonka"
+            position="0 0 -3"
+            rotation="0 0 0"
+            scale="1 1 1">
+        </a-entity>
+
+
+        <!-- ==================== CAMARA ==================== -->
+        <a-camera position="0 1.6 0">
+
+            <!-- Mensaje inicial -->
+            <a-entity
+                position="0 0 -1.5"
+                text="
+                    align: center;
+                    width: 6;
+                    wrapCount: 100;
+                    color: black;
+                    value: Click o toca para comenzar
+                "
+                hide-on-play="#video">
+            </a-entity>
+
+        </a-camera>
+
+
+    </a-scene>
+
+</body>
+
+</html>
