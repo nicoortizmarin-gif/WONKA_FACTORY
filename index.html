@@ -1,14 +1,22 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="utf-8">
-    <title>Fábrica de Chocolate - Wonka</title>
-    <meta
-      
-name="GASRTRONOMIA_WONKA"
-content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
 
-  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Gastronomía Wonka</title>
+
+    <meta
+        name="description"
+        content="Experiencia inmersiva de gastronomía inspirada en Willy Wonka">
+
+    <!-- ==================== A-FRAME ==================== -->
+
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+
+    <!-- ==================== SISTEMA DE INFOGRAFÍAS ==================== -->
 
     <script>
 
@@ -16,130 +24,141 @@ content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
 
             init: function () {
 
+                /* =========================
+                   BOTONES
+                ========================= */
 
-               const buttons = [
+                const elinkaButton =
+                    document.querySelector('#elinkaButton');
 
-                    document.querySelector('#elinkaButton'),
+                const tostaoButton =
+                    document.querySelector('#tostaoButton');
 
-                    document.querySelector('#tostaoButton'),
-
-                    document.querySelector('#nuevaButton')
-
-                ];
-
-
-                const infoPanel = document.querySelector('#infoPanel');
-
-                const infoImage = document.querySelector('#infoImage');
-
-                const infoTitle = document.querySelector('#infoTitle');
-
-                const closeButton = document.querySelector('#closeButton');
+                const nuevaButton =
+                    document.querySelector('#nuevaButton');
 
 
+                /* =========================
+                   PANEL
+                ========================= */
 
-                const infografias = [
+                const infoPanel =
+                    document.querySelector('#infoPanel');
 
-                    {
+                const infoImage =
+                    document.querySelector('#infoImage');
 
+                const infoTitle =
+                    document.querySelector('#infoTitle');
+
+                const closeButton =
+                    document.querySelector('#closeButton');
+
+
+                /* =========================
+                   INFORMACIÓN
+                ========================= */
+
+                const infografias = {
+
+                    elinka: {
                         imagen: '#elinka',
-
                         titulo: 'DULCES DE MENTA · ELLINIKA'
-
                     },
 
-
-                    {
-
+                    tostao: {
                         imagen: '#tostao',
-
                         titulo: 'DULCES DE CAFÉ · TOSTAO'
-
                     },
 
-
-
-                    {
-
+                    nueva: {
                         imagen: '#nueva',
-
                         titulo: 'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
-
                     }
 
+                };
 
 
-                ];
+                /* =========================
+                   FUNCIÓN PARA ABRIR
+                ========================= */
+
+                function abrirInfografia(datos) {
+
+                    infoImage.setAttribute(
+                        'material',
+                        'src',
+                        datos.imagen
+                    );
+
+                    infoTitle.setAttribute(
+                        'text',
+                        'value',
+                        datos.titulo
+                    );
+
+                    infoPanel.setAttribute(
+                        'visible',
+                        'true'
+                    );
+
+                }
 
 
+                /* =========================
+                   BOTONES
+                ========================= */
 
-                buttons.forEach((button, index) => {
+                elinkaButton.addEventListener('click', function () {
 
-
-                    button.addEventListener('click', function () {
-
-
-                        infoImage.setAttribute(
-
-                            'material',
-
-                            'src',
-
-                            infografias[index].imagen
-
-                        );
-
-
-
-                        infoTitle.setAttribute(
-
-                            'text',
-
-                            'value',
-
-                            infografias[index].titulo
-
-                        );
-
-
-
-                        infoPanel.setAttribute('visible', true);
-
-
-
-                    });
-
-
+                    abrirInfografia(
+                        infografias.elinka
+                    );
 
                 });
 
 
+                tostaoButton.addEventListener('click', function () {
+
+                    abrirInfografia(
+                        infografias.tostao
+                    );
+
+                });
+
+
+                nuevaButton.addEventListener('click', function () {
+
+                    abrirInfografia(
+                        infografias.nueva
+                    );
+
+                });
+
+
+                /* =========================
+                   CERRAR
+                ========================= */
 
                 closeButton.addEventListener('click', function () {
 
-
-                    infoPanel.setAttribute('visible', false);
-
+                    infoPanel.setAttribute(
+                        'visible',
+                        'false'
+                    );
 
                 });
 
-
-
             }
-
-
 
         });
 
     </script>
 
-
 </head>
 
 
-
 <body>
-
 
     <a-scene
 
@@ -150,363 +169,279 @@ content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
         raycaster="objects: .raycastable">
 
 
+        <!-- ================================================= -->
+        <!-- RECURSOS -->
+        <!-- ================================================= -->
 
         <a-assets>
 
 
+            <!-- ==================== VIDEO 360 ==================== -->
 
-            <!-- ESCENARIO 360 -->
-
-
-        <!-- Video 360 -->
-          <video id="video" preload="auto" src="video/video360.mp4" autoplay loop crossorigin="anonymous"> </video>
-      <!-- ==================== VIDEO 360 ==================== --> <a-videosphere rotation="0 -90 0" src="#video" visible="false" play-on-click> </a-videosphere>
-
-
-
-
-            <!-- MODELO 3D -->
+            <video
+                id="video"
+                preload="auto"
+                src="video/video360.mp4"
+                autoplay
+                loop
+                crossorigin="anonymous">
+            </video>
 
 
+            <!-- ==================== MODELO 3D ==================== -->
 
             <a-asset-item
-
                 id="puesto-wonka"
-
                 src="modelos/PUESTO_WONKA_3D_FINAL_.glb">
-
             </a-asset-item>
 
 
-
-
-
-            <!-- INFOGRAFÍA ELLINIKA -->
-
-
+            <!-- ==================== INFOGRAFÍA ELLINIKA ==================== -->
 
             <img
-
                 id="elinka"
-
                 src="infografias/INFOGRAFIA ELINKA_.png"
-
                 crossorigin="anonymous">
 
 
-
-
-
-            <!-- INFOGRAFÍA TOSTAO -->
-
-
+            <!-- ==================== INFOGRAFÍA TOSTAO ==================== -->
 
             <img
-
                 id="tostao"
-
                 src="infografias/INFOGRAFIA TOSTAO_.png"
-
                 crossorigin="anonymous">
 
 
-
-
-
-            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
-
-
+            <!-- ==================== INFOGRAFÍA NUEVA FELICIDAD ==================== -->
 
             <img
-
                 id="nueva"
-
                 src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
-
                 crossorigin="anonymous">
-
 
 
         </a-assets>
 
 
 
-
         <!-- ================================================= -->
-
         <!-- ESCENARIO 360 -->
-
         <!-- ================================================= -->
 
-
-
-        <a-sky
-
-            src="#escenario360"
-
-            rotation="0 -130 0">
-
-        </a-sky>
-
+        <a-videosphere
+            id="videoSphere"
+            rotation="0 -90 0"
+            src="#video">
+        </a-videosphere>
 
 
 
         <!-- ================================================= -->
-
         <!-- PUESTO WONKA 3D -->
-
         <!-- ================================================= -->
-
-
 
         <a-entity
-
             gltf-model="#puesto-wonka"
-
             position="0 0 -3"
-
             rotation="0 0 0"
-
             scale="1 1 1">
-
         </a-entity>
 
 
 
-
-
         <!-- ================================================= -->
-
         <!-- MENÚ DE INFOGRAFÍAS -->
-
         <!-- ================================================= -->
-
-
 
         <a-entity
-
             id="ui"
-
-            position="0 1.7 -2.7">
-
+            position="0 1.6 -3">
 
 
-
-
-            <!-- TÍTULO -->
-
-
+            <!-- ==================== TÍTULO ==================== -->
 
             <a-text
-
                 value="SABORES DE LA FÁBRICA"
-
                 align="center"
-
                 width="5"
-
                 color="white"
-
-                position="0 0.9 0">
-
+                position="0 1.1 0">
             </a-text>
 
 
 
-
-
-            <!-- ================= ELLINIKA ================= -->
-
-
+            <!-- ================================================= -->
+            <!-- ELLINIKA -->
+            <!-- ================================================= -->
 
             <a-entity
-
                 id="elinkaButton"
-
                 class="raycastable"
 
                 geometry="
-
                     primitive: plane;
-
-                    width: 1.1;
-
-                    height: 1.55;
-
+                    width: 1;
+                    height: 1.45;
                 "
 
                 material="
-
                     shader: flat;
-
                     src: #elinka;
-
                 "
 
-                position="-1.2 0 0">
+                position="-1.2 0 0"
 
 
+                animation__mouseenter="
+                    property: scale;
+                    to: 1.08 1.08 1.08;
+                    dur: 200;
+                    startEvents: mouseenter;
+                "
+
+
+                animation__mouseleave="
+                    property: scale;
+                    to: 1 1 1;
+                    dur: 200;
+                    startEvents: mouseleave;
+                ">
 
             </a-entity>
 
 
 
-
-
-            <!-- ================= TOSTAO ================= -->
-
-
+            <!-- ================================================= -->
+            <!-- TOSTAO -->
+            <!-- ================================================= -->
 
             <a-entity
-
                 id="tostaoButton"
-
                 class="raycastable"
 
                 geometry="
-
                     primitive: plane;
-
-                    width: 1.1;
-
-                    height: 1.55;
-
+                    width: 1;
+                    height: 1.45;
                 "
 
                 material="
-
                     shader: flat;
-
                     src: #tostao;
-
                 "
 
-                position="0 0 0">
+                position="0 0 0"
 
 
+                animation__mouseenter="
+                    property: scale;
+                    to: 1.08 1.08 1.08;
+                    dur: 200;
+                    startEvents: mouseenter;
+                "
+
+
+                animation__mouseleave="
+                    property: scale;
+                    to: 1 1 1;
+                    dur: 200;
+                    startEvents: mouseleave;
+                ">
 
             </a-entity>
 
 
 
-
-
-            <!-- ============== NUEVA FELICIDAD ============== -->
-
-
+            <!-- ================================================= -->
+            <!-- NUEVA FELICIDAD -->
+            <!-- ================================================= -->
 
             <a-entity
-
                 id="nuevaButton"
-
                 class="raycastable"
 
                 geometry="
-
                     primitive: plane;
-
-                    width: 1.1;
-
-                    height: 1.55;
-
+                    width: 1;
+                    height: 1.45;
                 "
 
                 material="
-
                     shader: flat;
-
                     src: #nueva;
-
                 "
 
-                position="1.2 0 0">
+                position="1.2 0 0"
 
 
+                animation__mouseenter="
+                    property: scale;
+                    to: 1.08 1.08 1.08;
+                    dur: 200;
+                    startEvents: mouseenter;
+                "
+
+
+                animation__mouseleave="
+                    property: scale;
+                    to: 1 1 1;
+                    dur: 200;
+                    startEvents: mouseleave;
+                ">
 
             </a-entity>
-
 
 
         </a-entity>
 
 
 
-
-
         <!-- ================================================= -->
-
-        <!-- PANEL DE INFOGRAFÍA -->
-
+        <!-- PANEL GRANDE -->
         <!-- ================================================= -->
-
-
 
         <a-entity
-
             id="infoPanel"
-
             visible="false"
-
-            position="0 1.6 -2.2">
-
+            position="0 1.6 -2">
 
 
-
-
-            <!-- FONDO -->
-
-
+            <!-- ==================== FONDO ==================== -->
 
             <a-plane
-
-                width="2.9"
-
-                height="2.2"
-
-                color="#222222"
-
-                opacity="0.96">
-
-            </a-plane>
-
-
-
-
-
-            <!-- IMAGEN -->
-
-
-
-            <a-plane
-
-                id="infoImage"
-
-                position="0 0 0.02"
-
-                width="2.3"
-
-                height="1.65"
+                width="3.3"
+                height="2.8"
 
                 material="
-
+                    color: #171717;
                     shader: flat;
-
-                    src: #elinka;
-
+                    opacity: 0.97;
                 ">
-
             </a-plane>
 
 
 
+            <!-- ==================== INFOGRAFÍA ==================== -->
+
+            <a-plane
+                id="infoImage"
+
+                position="0 0 0.03"
+
+                width="2.4"
+                height="2.35"
+
+                material="
+                    shader: flat;
+                    src: #elinka;
+                ">
+            </a-plane>
 
 
-            <!-- TITULO -->
 
-
+            <!-- ==================== TÍTULO ==================== -->
 
             <a-text
-
                 id="infoTitle"
 
                 value="INFOGRAFÍA"
@@ -517,56 +452,37 @@ content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
 
                 color="white"
 
-                position="0 -1 0.03">
-
+                position="0 -1.18 0.04">
             </a-text>
 
 
 
-
-
-            <!-- BOTÓN CERRAR -->
-
-
+            <!-- ==================== BOTÓN CERRAR ==================== -->
 
             <a-entity
-
                 id="closeButton"
 
                 class="raycastable"
 
-                position="1.15 0.85 0.05"
-
                 geometry="
-
-                    primitive: plane;
-
-                    width: 0.35;
-
-                    height: 0.35;
-
+                    primitive: circle;
+                    radius: 0.18;
                 "
 
                 material="
-
+                    color: #B83232;
                     shader: flat;
+                "
 
-                    color: #C0392B;
-
-                ">
-
+                position="1.42 1.18 0.05">
 
 
                 <a-text
-
                     value="X"
-
                     align="center"
-
                     width="2"
-
-                    color="white">
-
+                    color="white"
+                    position="0 0 0.01">
                 </a-text>
 
 
@@ -576,59 +492,54 @@ content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
         </a-entity>
 
 
-        <!-- ================================================= -->
 
+        <!-- ================================================= -->
         <!-- CÁMARA -->
-
         <!-- ================================================= -->
-
 
         <a-camera
-
             position="0 1.6 0">
-
         </a-camera>
 
 
-        <!-- ================================================= -->
-
-        <!-- CONTROLES VR -->
 
         <!-- ================================================= -->
-
+        <!-- CONTROL IZQUIERDO -->
+        <!-- ================================================= -->
 
         <a-entity
-
             id="leftHand"
 
             laser-controls="hand: left"
 
-            raycaster="objects: .raycastable">
-
+            raycaster="
+                objects: .raycastable;
+            ">
         </a-entity>
 
 
 
+        <!-- ================================================= -->
+        <!-- CONTROL DERECHO -->
+        <!-- ================================================= -->
 
         <a-entity
-
             id="rightHand"
 
             laser-controls="hand: right"
 
-            raycaster="objects: .raycastable"
+            raycaster="
+                objects: .raycastable;
+            "
 
-            line="color: #118A7E">
-
+            line="
+                color: #118A7E;
+            ">
         </a-entity>
 
 
     </a-scene>
 
-
 </body>
 
-
-</html> 
-
-
+</html>
