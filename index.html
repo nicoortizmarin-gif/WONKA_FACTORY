@@ -1,115 +1,626 @@
-<!DOCTYPE html>
-<html lang="es">
+lo: 'DULCES DE CAFÉ · TOSTAO'
 
-<head>
-    <meta charset="utf-8">
-    <title>Fábrica de Chocolate - Wonka</title>
-    <meta name="description" content="Experiencia inmersiva de la fábrica de chocolate de Willy Wonka">
+                    },
 
-    <!-- ==================== A-FRAME ==================== -->
-    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
-    <!-- ==================== INTERFAZ ==================== -->
-    <script>
-        AFRAME.registerComponent('infografia-ui', {
-            init: function () {
-                const buttons = [
-                    document.querySelector('#elinkaButton'),
-                    document.querySelector('#tostaoButton'),
-                    document.querySelector('#nuevaButton')
+
+                    {
+
+                        imagen: '#nueva',
+
+                        titulo: 'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
+
+                    }
+
+
+
                 ];
 
-                const infoPanel = document.querySelector('#infoPanel');
-                const infoImage = document.querySelector('#infoImage');
-                const infoTitle = document.querySelector('#infoTitle');
-                const closeButton = document.querySelector('#closeButton');
 
-                const infografias = [
-                    { imagen: '#elinka', titulo: 'DULCES DE MENTA · ELLINIKA' },
-                    { imagen: '#tostao', titulo: 'DULCES DE CAFÉ · TOSTAO' },
-                    { imagen: '#nueva', titulo: 'GALLETAS DE LA SUERTE · NUEVA FELICIDAD' }
-                ];
+
+
 
                 buttons.forEach((button, index) => {
+
+
+
                     button.addEventListener('click', function () {
-                        infoImage.setAttribute('material', 'src', infografias[index].imagen);
-                        infoTitle.setAttribute('text', 'value', infografias[index].titulo);
+
+
+
+                        infoImage.setAttribute(
+
+                            'material',
+
+                            'src',
+
+                            infografias[index].imagen
+
+                        );
+
+
+
+                        infoTitle.setAttribute(
+
+                            'text',
+
+                            'value',
+
+                            infografias[index].titulo
+
+                        );
+
+
+
                         infoPanel.setAttribute('visible', true);
+
+
+
                     });
+
+
+
                 });
+
+
+
+
 
                 closeButton.addEventListener('click', function () {
+
+
+
                     infoPanel.setAttribute('visible', false);
+
+
+
                 });
+
+
+
             }
+
+
+
         });
+
+
+
     </script>
+
+
+
 </head>
 
+
+
+
+
 <body>
-    <a-scene infografia-ui cursor="rayOrigin: mouse; fuse: false" raycaster="objects: .raycastable">
+
+
+
+    <a-scene
+
+        infografia-ui
+
+        cursor="rayOrigin: mouse; fuse: false"
+
+        raycaster="objects: .raycastable">
+
+
+
+
 
         <!-- ================================================= -->
+
         <!-- RECURSOS -->
+
         <!-- ================================================= -->
+
+
+
         <a-assets>
-            <img id="escenario360" src="imagenes/escenario360.jpg" crossorigin="anonymous">
-            <a-asset-item id="puesto-wonka" src="modelos/PUESTO_WONKA_3D_FINAL_.glb"></a-asset-item>
-            <img id="elinka" src="infografias/INFOGRAFIA ELINKA_.png" crossorigin="anonymous">
-            <img id="tostao" src="infografias/INFOGRAFIA TOSTAO_.png" crossorigin="anonymous">
-            <img id="nueva" src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png" crossorigin="anonymous">
+
+
+
+            <!-- ESCENARIO 360 -->
+
+
+
+            <img
+
+                id="escenario360"
+
+                src="imagenes/escenario360.jpg"
+
+                crossorigin="anonymous">
+
+
+
+
+
+            <!-- MODELO 3D -->
+
+
+
+            <a-asset-item
+
+                id="puesto-wonka"
+
+                src="modelos/PUESTO_WONKA_3D_FINAL_.glb">
+
+            </a-asset-item>
+
+
+
+
+
+            <!-- INFOGRAFÍA ELLINIKA -->
+
+
+
+            <img
+
+                id="elinka"
+
+                src="infografias/INFOGRAFIA ELINKA_.png"
+
+                crossorigin="anonymous">
+
+
+
+
+
+            <!-- INFOGRAFÍA TOSTAO -->
+
+
+
+            <img
+
+                id="tostao"
+
+                src="infografias/INFOGRAFIA TOSTAO_.png"
+
+                crossorigin="anonymous">
+
+
+
+
+
+            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
+
+
+
+            <img
+
+                id="nueva"
+
+                src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
+
+                crossorigin="anonymous">
+
+
+
         </a-assets>
 
+
+
+
+
         <!-- ================================================= -->
+
         <!-- ESCENARIO 360 -->
-        <!-- ================================================= -->
-        <a-sky src="#escenario360" rotation="0 -130 0"></a-sky>
 
         <!-- ================================================= -->
+
+
+
+        <a-sky
+
+            src="#escenario360"
+
+            rotation="0 -130 0">
+
+        </a-sky>
+
+
+
+
+
+        <!-- ================================================= -->
+
         <!-- PUESTO WONKA 3D -->
-        <!-- ================================================= -->
-        <a-entity gltf-model="#puesto-wonka" position="0 0 -3" rotation="0 0 0" scale="1 1 1"></a-entity>
 
         <!-- ================================================= -->
+
+
+
+        <a-entity
+
+            gltf-model="#puesto-wonka"
+
+            position="0 0 -3"
+
+            rotation="0 0 0"
+
+            scale="1 1 1">
+
+        </a-entity>
+
+
+
+
+
+        <!-- ================================================= -->
+
         <!-- MENÚ DE INFOGRAFÍAS -->
+
         <!-- ================================================= -->
-        <a-entity id="ui">
+
+
+
+        <a-entity
+
+            id="ui"
+
+            position="0 1.7 -2.7">
+
+
+
+
+
             <!-- TÍTULO -->
-            <a-text value="SABORES DE LA FÁBRICA" align="center" width="5" color="white" position="0 2.8 -2.7"></a-text>
 
-            <!-- ================= ELLINIKA (AZUL) ================= -->
-            <a-entity id="elinkaButton" class="raycastable" geometry="primitive: plane; width: 1.42; height: 1.95;" material="shader: flat; src: #elinka;" position="9.150 2.350 -0.950" rotation="-15 152.84 -3.080">
-                <a-entity position="0 -0.8 0.05" geometry="primitive: plane; width: 0.8; height: 0.15" material="color: #000000; opacity: 0.7">
-                    <a-text value="Toca para ver" align="center" width="2" color="white" position="0 0 0.01"></a-text>
-                </a-entity>
+
+
+            <a-text
+
+                value="SABORES DE LA FÁBRICA"
+
+                align="center"
+
+                width="5"
+
+                color="white"
+
+                position="0 0.9 0">
+
+            </a-text>
+
+
+
+
+
+            <!-- ================= ELLINIKA ================= -->
+
+
+
+            <a-entity
+
+                id="elinkaButton"
+
+                class="raycastable"
+
+                geometry="
+
+                    primitive: plane;
+
+                    width: 1.1;
+
+                    height: 1.55;
+
+                "
+
+                material="
+
+                    shader: flat;
+
+                    src: #elinka;
+
+                "
+
+                position="-1.2 0 0">
+
+
+
             </a-entity>
 
-            <!-- ================= TOSTAO (AMARILLO) ================= -->
-            <a-entity id="tostaoButton" class="raycastable" geometry="primitive: plane; width: 1.42; height: 1.95;" material="shader: flat; src: #tostao;" position="0 1.5 -2.8" rotation="-15 0 0"></a-entity>
 
-            <!-- ============== NUEVA FELICIDAD (ROJO) ============== -->
-            <a-entity id="nuevaButton" class="raycastable" geometry="primitive: plane; width: 1.42; height: 1.95;" material="shader: flat; src: #nueva;" position="-9.150 2.350 -0.950" rotation="-15 -152.84 3.080"></a-entity>
+
+
+
+            <!-- ================= TOSTAO ================= -->
+
+
+
+            <a-entity
+
+                id="tostaoButton"
+
+                class="raycastable"
+
+                geometry="
+
+                    primitive: plane;
+
+                    width: 1.1;
+
+                    height: 1.55;
+
+                "
+
+                material="
+
+                    shader: flat;
+
+                    src: #tostao;
+
+                "
+
+                position="0 0 0">
+
+
+
+            </a-entity>
+
+
+
+
+
+            <!-- ============== NUEVA FELICIDAD ============== -->
+
+
+
+            <a-entity
+
+                id="nuevaButton"
+
+                class="raycastable"
+
+                geometry="
+
+                    primitive: plane;
+
+                    width: 1.1;
+
+                    height: 1.55;
+
+                "
+
+                material="
+
+                    shader: flat;
+
+                    src: #nueva;
+
+                "
+
+                position="1.2 0 0">
+
+
+
+            </a-entity>
+
+
+
         </a-entity>
 
+
+
+
+
         <!-- ================================================= -->
+
         <!-- PANEL DE INFOGRAFÍA -->
-        <!-- ================================================= -->
-        <a-entity id="infoPanel" visible="false" position="0 1.6 -1.8">
-            <a-plane width="2.2" height="2.9" color="#222222" opacity="0.96"></a-plane>
-            <a-plane id="infoImage" position="0 0 0.02" width="1.8" height="2.5" material="shader: flat; src: #elinka;"></a-plane>
-            <a-text id="infoTitle" value="INFOGRAFÍA" align="center" width="3" color="white" position="0 -1.25 0.03"></a-text>
-            <a-entity id="closeButton" class="raycastable" position="0.95 1.3 0.05" geometry="primitive: plane; width: 0.35; height: 0.35;" material="shader: flat; color: #C0392B;">
-                <a-text value="X" align="center" width="2" color="white"></a-text>
-            </a-entity>
-        </a-entity>
 
         <!-- ================================================= -->
-        <!-- CÁMARA Y CONTROLES RECUPERADOS -->
+
+
+
+        <a-entity
+
+            id="infoPanel"
+
+            visible="false"
+
+            position="0 1.6 -2.2">
+
+
+
+
+
+            <!-- FONDO -->
+
+
+
+            <a-plane
+
+                width="2.9"
+
+                height="2.2"
+
+                color="#222222"
+
+                opacity="0.96">
+
+            </a-plane>
+
+
+
+
+
+            <!-- IMAGEN -->
+
+
+
+            <a-plane
+
+                id="infoImage"
+
+                position="0 0 0.02"
+
+                width="2.3"
+
+                height="1.65"
+
+                material="
+
+                    shader: flat;
+
+                    src: #elinka;
+
+                ">
+
+            </a-plane>
+
+
+
+
+
+            <!-- TITULO -->
+
+
+
+            <a-text
+
+                id="infoTitle"
+
+                value="INFOGRAFÍA"
+
+                align="center"
+
+                width="3"
+
+                color="white"
+
+                position="0 -1 0.03">
+
+            </a-text>
+
+
+
+
+
+            <!-- BOTÓN CERRAR -->
+
+
+
+            <a-entity
+
+                id="closeButton"
+
+                class="raycastable"
+
+                position="1.15 0.85 0.05"
+
+                geometry="
+
+                    primitive: plane;
+
+                    width: 0.35;
+
+                    height: 0.35;
+
+                "
+
+                material="
+
+                    shader: flat;
+
+                    color: #C0392B;
+
+                ">
+
+
+
+                <a-text
+
+                    value="X"
+
+                    align="center"
+
+                    width="2"
+
+                    color="white">
+
+                </a-text>
+
+
+
+            </a-entity>
+
+
+
+        </a-entity>
+
+
+
+
+
         <!-- ================================================= -->
-        <a-camera position="0 1.6 0"></a-camera>
-        <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: .raycastable"></a-entity>
-        <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: .raycastable" line="color: #118A7E"></a-entity>
+
+        <!-- CÁMARA -->
+
+        <!-- ================================================= -->
+
+
+
+        <a-camera
+
+            position="0 1.6 0">
+
+        </a-camera>
+
+
+
+
+
+        <!-- ================================================= -->
+
+        <!-- CONTROLES VR -->
+
+        <!-- ================================================= -->
+
+
+
+        <a-entity
+
+            id="leftHand"
+
+            laser-controls="hand: left"
+
+            raycaster="objects: .raycastable">
+
+        </a-entity>
+
+
+
+
+
+        <a-entity
+
+            id="rightHand"
+
+            laser-controls="hand: right"
+
+            raycaster="objects: .raycastable"
+
+            line="color: #118A7E">
+
+        </a-entity>
+
+
+
+
 
     </a-scene>
+
+
+
 </body>
-</html>
+
+
+
+</html> 
+
