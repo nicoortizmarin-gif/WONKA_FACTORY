@@ -168,184 +168,83 @@
         </a-entity>
 
 
-        <!-- ================================================= -->
+   <!-- ================================================= -->
         <!-- MENÚ DE INFOGRAFÍAS -->
         <!-- ================================================= -->
 
-        <a-entity
-            id="ui"
-            position="0 1.7 -2.7">
+        <a-entity id="ui">
+            
+            <!-- TÍTULO GLOBAL (Puedes ocultarlo si ya está en el modelo 3D) -->
+            <a-text value="SABORES DE LA FABRICA" align="center" width="5" color="white" position="0 2.6 -2.7"></a-text>
 
-
-            <!-- TÍTULO -->
-
-            <a-text
-                value="SABORES DE LA FÁBRICA"
-                align="center"
-                width="5"
-                color="white"
-                position="0 0.9 0">
-            </a-text>
-
-
-            <!-- ================= ELLINIKA ================= -->
-
-            <a-entity
-                id="elinkaButton"
-                class="raycastable"
-                geometry="
-                    primitive: plane;
-                    width: 1.1;
-                    height: 1.55;
-                "
-                material="
-                    shader: flat;
-                    src: #elinka;
-                "
-                position="-1.2 0 0">
-
+            <!-- ================= ELLINIKA (AZUL) ================= -->
+            <!-- Ajusta position y rotation para que coincida con el atril azul -->
+            <a-entity id="elinkaButton" class="raycastable" 
+                geometry="primitive: plane; width: 1.1; height: 1.55;" 
+                material="shader: flat; src: #elinka;" 
+                position="-1.5 1.2 -2.5" 
+                rotation="-15 20 0">
+                
+                <!-- Indicador de Clic -->
+                <a-entity position="0 -0.6 0.02" geometry="primitive: plane; width: 0.8; height: 0.15" material="color: #000000; opacity: 0.75">
+                    <a-text value="Toca para ver" align="center" width="1.5" color="#FFF" position="0 0 0.01"></a-text>
+                </a-entity>
             </a-entity>
 
-
-            <!-- ================= TOSTAO ================= -->
-
-            <a-entity
-                id="tostaoButton"
-                class="raycastable"
-                geometry="
-                    primitive: plane;
-                    width: 1.1;
-                    height: 1.55;
-                "
-                material="
-                    shader: flat;
-                    src: #tostao;
-                "
-                position="0 0 0">
-
+            <!-- ================= TOSTAO (AMARILLO) ================= -->
+            <!-- Ajusta position y rotation para que coincida con el atril amarillo -->
+            <a-entity id="tostaoButton" class="raycastable" 
+                geometry="primitive: plane; width: 1.1; height: 1.55;" 
+                material="shader: flat; src: #tostao;" 
+                position="0 1.2 -2.8" 
+                rotation="-15 0 0">
+                
+                <!-- Indicador de Clic -->
+                <a-entity position="0 -0.6 0.02" geometry="primitive: plane; width: 0.8; height: 0.15" material="color: #000000; opacity: 0.75">
+                    <a-text value="Toca para ver" align="center" width="1.5" color="#FFF" position="0 0 0.01"></a-text>
+                </a-entity>
             </a-entity>
 
-
-            <!-- ============== NUEVA FELICIDAD ============== -->
-
-            <a-entity
-                id="nuevaButton"
-                class="raycastable"
-                geometry="
-                    primitive: plane;
-                    width: 1.1;
-                    height: 1.55;
-                "
-                material="
-                    shader: flat;
-                    src: #nueva;
-                "
-                position="1.2 0 0">
-
+            <!-- ============== NUEVA FELICIDAD (ROJO) ============== -->
+            <!-- Ajusta position y rotation para que coincida con el atril rojo -->
+            <a-entity id="nuevaButton" class="raycastable" 
+                geometry="primitive: plane; width: 1.1; height: 1.55;" 
+                material="shader: flat; src: #nueva;" 
+                position="1.5 1.2 -2.5" 
+                rotation="-15 -20 0">
+                
+                <!-- Indicador de Clic -->
+                <a-entity position="0 -0.6 0.02" geometry="primitive: plane; width: 0.8; height: 0.15" material="color: #000000; opacity: 0.75">
+                    <a-text value="Toca para ver" align="center" width="1.5" color="#FFF" position="0 0 0.01"></a-text>
+                </a-entity>
             </a-entity>
 
         </a-entity>
 
-
         <!-- ================================================= -->
-        <!-- PANEL DE INFOGRAFÍA -->
+        <!-- PANEL DE INFOGRAFÍA (CORREGIDO EL ASPECT RATIO) -->
         <!-- ================================================= -->
 
-        <a-entity
-            id="infoPanel"
-            visible="false"
-            position="0 1.6 -2.2">
+        <a-entity id="infoPanel" visible="false" position="0 1.6 -1.8">
 
+            <!-- FONDO (Ajustado a vertical) -->
+            <a-plane width="1.9" height="2.6" color="#222222" opacity="0.96"></a-plane>
 
-            <!-- FONDO -->
-
-            <a-plane
-                width="2.9"
-                height="2.2"
-                color="#222222"
-                opacity="0.96">
+            <!-- IMAGEN (Proporción vertical para evitar aplastamiento) -->
+            <a-plane id="infoImage" position="0 0.1 0.02" width="1.5" height="2.1" 
+                material="shader: flat; src: #elinka;">
             </a-plane>
-
-
-            <!-- IMAGEN -->
-
-            <a-plane
-                id="infoImage"
-                position="0 0 0.02"
-                width="2.3"
-                height="1.65"
-                material="
-                    shader: flat;
-                    src: #elinka;
-                ">
-            </a-plane>
-
 
             <!-- TITULO -->
-
-            <a-text
-                id="infoTitle"
-                value="INFOGRAFÍA"
-                align="center"
-                width="3"
-                color="white"
-                position="0 -1 0.03">
-            </a-text>
-
+            <a-text id="infoTitle" value="INFOGRAFIA" align="center" width="3" color="white" position="0 -1.1 0.03"></a-text>
 
             <!-- BOTÓN CERRAR -->
-
-            <a-entity
-                id="closeButton"
-                class="raycastable"
-                position="1.15 0.85 0.05"
-                geometry="
-                    primitive: plane;
-                    width: 0.35;
-                    height: 0.35;
-                "
-                material="
-                    shader: flat;
-                    color: #C0392B;
-                ">
-
-                <a-text
-                    value="X"
-                    align="center"
-                    width="2"
-                    color="white">
-                </a-text>
-
+            <a-entity id="closeButton" class="raycastable" position="0.8 1.15 0.05" 
+                geometry="primitive: plane; width: 0.35; height: 0.35;" 
+                material="shader: flat; color: #C0392B;">
+                <a-text value="X" align="center" width="2" color="white"></a-text>
             </a-entity>
 
-        </a-entity>
-
-
-        <!-- ================================================= -->
-        <!-- CÁMARA -->
-        <!-- ================================================= -->
-
-        <a-camera
-            position="0 1.6 0">
-        </a-camera>
-
-
-        <!-- ================================================= -->
-        <!-- CONTROLES VR -->
-        <!-- ================================================= -->
-
-        <a-entity
-            id="leftHand"
-            laser-controls="hand: left"
-            raycaster="objects: .raycastable">
-        </a-entity>
-
-
-        <a-entity
-            id="rightHand"
-            laser-controls="hand: right"
-            raycaster="objects: .raycastable"
-            line="color: #118A7E">
         </a-entity>
 
 
