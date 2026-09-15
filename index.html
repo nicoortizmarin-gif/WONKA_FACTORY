@@ -20,7 +20,7 @@
 
 
     <!-- ================================================= -->
-    <!-- SISTEMA DE INFOGRAFÍAS -->
+    <!-- COMPONENTE DE INFOGRAFÍAS -->
     <!-- ================================================= -->
 
     <script>
@@ -30,7 +30,7 @@
             init: function () {
 
                 /* =================================================
-                   MODELO REAL DE LA ESCENA
+                   ELEMENTOS DEL PUESTO
                 ================================================= */
 
                 const puesto =
@@ -52,7 +52,7 @@
 
 
                 /* =================================================
-                   PANEL
+                   PANEL GRANDE
                 ================================================= */
 
                 const infoPanel =
@@ -90,215 +90,241 @@
 
 
                 /* =================================================
-                   DATOS
+                   INFORMACIÓN DE CADA INFOGRAFÍA
                 ================================================= */
 
                 const infografias = {
 
                     elinka: {
+
                         imagen: '#elinka',
-                        titulo: 'DULCES DE MENTA · ELLINIKA'
+
+                        titulo:
+                            'DULCES DE MENTA · ELLINIKA'
+
                     },
 
                     tostao: {
+
                         imagen: '#tostao',
-                        titulo: 'DULCES DE CAFÉ · TOSTAO'
+
+                        titulo:
+                            'DULCES DE CAFÉ · TOSTAO'
+
                     },
 
                     nueva: {
+
                         imagen: '#nueva',
-                        titulo: 'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
+
+                        titulo:
+                            'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
+
                     }
 
                 };
 
 
                 /* =================================================
-                   CUANDO EL GLB TERMINA DE CARGAR
+                   PEGAR INFOGRAFÍAS A LOS CARTELES
                 ================================================= */
 
-                puesto.addEventListener('model-loaded', function () {
+                puesto.addEventListener(
+                    'model-loaded',
+                    function () {
 
-                    console.log('==============================');
-                    console.log('GLB CARGADO');
-                    console.log('==============================');
-
-
-                    const modelo =
-                        puesto.getObject3D('mesh');
-
-
-                    if (!modelo) {
-
-                        console.error(
-                            'No se encontró el mesh del modelo'
+                        console.log(
+                            'Puesto 3D cargado correctamente'
                         );
 
-                        return;
 
-                    }
+                        /* =========================================
+                           OBTENER MALLA DEL GLB
+                        ========================================= */
+
+                        const modelo =
+                            puesto.getObject3D('mesh');
 
 
-                    /* =================================================
-                       MOSTRAR TODOS LOS NOMBRES DEL GLB
-                    ================================================= */
+                        if (!modelo) {
 
-                    modelo.traverse(function (objeto) {
+                            console.error(
+                                'No se encontró la malla del GLB'
+                            );
 
-                        if (objeto.name) {
+                            return;
 
-                            console.log(
-                                'OBJETO GLB:',
-                                objeto.name
+                        }
+
+
+                        /* =========================================
+                           BUSCAR LOS TRES CARTELES
+                        ========================================= */
+
+                        const cartelElinka =
+                            modelo.getObjectByName(
+                                'CARTEL_ELINKA'
+                            );
+
+                        const cartelTostao =
+                            modelo.getObjectByName(
+                                'CARTEL_TOSTAO'
+                            );
+
+                        const cartelNueva =
+                            modelo.getObjectByName(
+                                'CARTEL_NUEVA_FELICIDAD'
+                            );
+
+
+                        /* =========================================
+                           MOSTRAR RESULTADO EN CONSOLA
+                        ========================================= */
+
+                        console.log(
+                            'CARTEL_ELINKA:',
+                            cartelElinka
+                        );
+
+                        console.log(
+                            'CARTEL_TOSTAO:',
+                            cartelTostao
+                        );
+
+                        console.log(
+                            'CARTEL_NUEVA_FELICIDAD:',
+                            cartelNueva
+                        );
+
+
+                        /* =========================================
+                           ELLINIKA
+                        ========================================= */
+
+                        if (cartelElinka) {
+
+                            cartelElinka.add(
+                                elinkaButton.object3D
+                            );
+
+
+                            elinkaButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            elinkaButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            elinkaButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_ELINKA'
                             );
 
                         }
 
-                    });
+
+                        /* =========================================
+                           TOSTAO
+                        ========================================= */
+
+                        if (cartelTostao) {
+
+                            cartelTostao.add(
+                                tostaoButton.object3D
+                            );
 
 
-                    /* =================================================
-                       BUSCAR CARTELES
-                    ================================================= */
-
-                    const cartelElinka =
-                        modelo.getObjectByName(
-                            'CARTEL_ELINKA'
-                        );
-
-                    const cartelTostao =
-                        modelo.getObjectByName(
-                            'CARTEL_TOSTAO'
-                        );
-
-                    const cartelNueva =
-                        modelo.getObjectByName(
-                            'CARTEL_NUEVA_FELICIDAD'
-                        );
+                            tostaoButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
 
 
-                    console.log(
-                        'CARTEL_ELINKA →',
-                        cartelElinka
-                    );
-
-                    console.log(
-                        'CARTEL_TOSTAO →',
-                        cartelTostao
-                    );
-
-                    console.log(
-                        'CARTEL_NUEVA_FELICIDAD →',
-                        cartelNueva
-                    );
+                            tostaoButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
 
 
-                    /* =================================================
-                       ELLINIKA
-                    ================================================= */
+                            tostaoButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
 
-                    if (cartelElinka) {
+                        }
+                        else {
 
-                        cartelElinka.add(
-                            elinkaButton.object3D
-                        );
+                            console.error(
+                                'No se encontró CARTEL_TOSTAO'
+                            );
 
-
-                        elinkaButton.object3D.position.set(
-                            0,
-                            0,
-                            0.02
-                        );
+                        }
 
 
-                        elinkaButton.object3D.rotation.set(
-                            0,
-                            0,
-                            0
-                        );
+                        /* =========================================
+                           NUEVA FELICIDAD
+                        ========================================= */
+
+                        if (cartelNueva) {
+
+                            cartelNueva.add(
+                                nuevaButton.object3D
+                            );
 
 
-                        elinkaButton.object3D.scale.set(
-                            1,
-                            1,
-                            1
-                        );
-
-                    }
+                            nuevaButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
 
 
-                    /* =================================================
-                       TOSTAO
-                    ================================================= */
-
-                    if (cartelTostao) {
-
-                        cartelTostao.add(
-                            tostaoButton.object3D
-                        );
+                            nuevaButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
 
 
-                        tostaoButton.object3D.position.set(
-                            0,
-                            0,
-                            0.02
-                        );
+                            nuevaButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
 
+                        }
+                        else {
 
-                        tostaoButton.object3D.rotation.set(
-                            0,
-                            0,
-                            0
-                        );
+                            console.error(
+                                'No se encontró CARTEL_NUEVA_FELICIDAD'
+                            );
 
-
-                        tostaoButton.object3D.scale.set(
-                            1,
-                            1,
-                            1
-                        );
+                        }
 
                     }
-
-
-                    /* =================================================
-                       NUEVA FELICIDAD
-                    ================================================= */
-
-                    if (cartelNueva) {
-
-                        cartelNueva.add(
-                            nuevaButton.object3D
-                        );
-
-
-                        nuevaButton.object3D.position.set(
-                            0,
-                            0,
-                            0.02
-                        );
-
-
-                        nuevaButton.object3D.rotation.set(
-                            0,
-                            0,
-                            0
-                        );
-
-
-                        nuevaButton.object3D.scale.set(
-                            1,
-                            1,
-                            1
-                        );
-
-                    }
-
-                });
+                );
 
 
                 /* =================================================
-                   ABRIR INFOGRAFÍA
+                   FUNCIÓN PARA ABRIR UNA INFOGRAFÍA
                 ================================================= */
 
                 function abrirInfografia(nombre) {
@@ -310,12 +336,20 @@
                         imagenes[nombre];
 
 
+                    /* =============================================
+                       CAMBIAR IMAGEN
+                    ============================================= */
+
                     infoImage.setAttribute(
                         'material',
                         'src',
                         datos.imagen
                     );
 
+
+                    /* =============================================
+                       CAMBIAR TÍTULO
+                    ============================================= */
 
                     infoTitle.setAttribute(
                         'text',
@@ -324,9 +358,9 @@
                     );
 
 
-                    /* =================================================
-                       MANTENER PROPORCIÓN
-                    ================================================= */
+                    /* =============================================
+                       MANTENER PROPORCIÓN ORIGINAL
+                    ============================================= */
 
                     if (
                         imagen &&
@@ -339,11 +373,24 @@
                             imagen.naturalHeight;
 
 
+                        /* -----------------------------------------
+                           ALTURA FIJA
+                        ----------------------------------------- */
+
                         const altura = 2.7;
+
+
+                        /* -----------------------------------------
+                           ANCHO CALCULADO
+                        ----------------------------------------- */
 
                         const ancho =
                             altura * proporcion;
 
+
+                        /* -----------------------------------------
+                           IMAGEN
+                        ----------------------------------------- */
 
                         infoImage.setAttribute(
                             'geometry',
@@ -355,6 +402,10 @@
                         );
 
 
+                        /* -----------------------------------------
+                           FONDO
+                        ----------------------------------------- */
+
                         panelBackground.setAttribute(
                             'geometry',
                             {
@@ -365,11 +416,19 @@
                         );
 
 
+                        /* -----------------------------------------
+                           TÍTULO
+                        ----------------------------------------- */
+
                         infoTitle.setAttribute(
                             'position',
                             `0 ${-(altura / 2 + 0.28)} 0.04`
                         );
 
+
+                        /* -----------------------------------------
+                           BOTÓN X
+                        ----------------------------------------- */
 
                         closeButton.setAttribute(
                             'position',
@@ -378,6 +437,10 @@
 
                     }
 
+
+                    /* =============================================
+                       MOSTRAR PANEL
+                    ============================================= */
 
                     infoPanel.setAttribute(
                         'visible',
@@ -388,35 +451,55 @@
 
 
                 /* =================================================
-                   BOTONES
+                   CLICK ELLINIKA
                 ================================================= */
 
                 elinkaButton.addEventListener(
                     'click',
                     function () {
-                        abrirInfografia('elinka');
-                    }
-                );
 
+                        abrirInfografia(
+                            'elinka'
+                        );
 
-                tostaoButton.addEventListener(
-                    'click',
-                    function () {
-                        abrirInfografia('tostao');
-                    }
-                );
-
-
-                nuevaButton.addEventListener(
-                    'click',
-                    function () {
-                        abrirInfografia('nueva');
                     }
                 );
 
 
                 /* =================================================
-                   CERRAR
+                   CLICK TOSTAO
+                ================================================= */
+
+                tostaoButton.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirInfografia(
+                            'tostao'
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   CLICK NUEVA FELICIDAD
+                ================================================= */
+
+                nuevaButton.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirInfografia(
+                            'nueva'
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   CERRAR INFOGRAFÍA
                 ================================================= */
 
                 closeButton.addEventListener(
@@ -442,6 +525,10 @@
 
 <body>
 
+    <!-- ================================================= -->
+    <!-- ESCENA -->
+    <!-- ================================================= -->
+
     <a-scene
 
         infografia-ui
@@ -459,52 +546,80 @@
         <a-assets>
 
 
-            <!-- VIDEO -->
+            <!-- ============================================= -->
+            <!-- VIDEO 360 -->
+            <!-- ============================================= -->
 
             <video
+
                 id="video"
+
                 preload="auto"
+
                 src="video/video360.mp4"
+
                 autoplay
+
                 loop
-                crossorigin="anonymous">
+
+                crossorigin="anonymous"
+            >
             </video>
 
 
-            <!-- GLB -->
-
-            <!-- IMPORTANTE:
-                 ESTE ID ES DISTINTO AL ID DEL MODELO -->
+            <!-- ============================================= -->
+            <!-- MODELO 3D -->
+            <!-- ============================================= -->
 
             <a-asset-item
-                id="puestoAsset"
-                src="modelos/PUESTO_WONKA_3D_FINAL_.glb">
+
+                id="puesto-wonka"
+
+                src="modelos/PUESTO_WONKA_3D_FINAL_.glb"
+            >
             </a-asset-item>
 
 
+            <!-- ============================================= -->
             <!-- INFOGRAFÍA ELLINIKA -->
+            <!-- ============================================= -->
 
             <img
+
                 id="elinka"
+
                 src="infografias/INFOGRAFIA ELINKA_.png"
-                crossorigin="anonymous">
+
+                crossorigin="anonymous"
+            >
 
 
+            <!-- ============================================= -->
             <!-- INFOGRAFÍA TOSTAO -->
+            <!-- ============================================= -->
 
             <img
+
                 id="tostao"
+
                 src="infografias/INFOGRAFIA TOSTAO_.png"
-                crossorigin="anonymous">
+
+                crossorigin="anonymous"
+            >
 
 
-            <!-- INFOGRAFÍA NUEVA -->
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
+            <!-- ============================================= -->
 
             <img
-                id="nueva"
-                src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
-                crossorigin="anonymous">
 
+                id="nueva"
+
+                src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
+
+                crossorigin="anonymous"
+            >
 
         </a-assets>
 
@@ -527,14 +642,14 @@
 
 
         <!-- ================================================= -->
-        <!-- MODELO 3D -->
+        <!-- PUESTO WONKA 3D -->
         <!-- ================================================= -->
 
         <a-entity
 
             id="puesto-wonka"
 
-            gltf-model="#puestoAsset"
+            gltf-model="#puesto-wonka"
 
             position="0 0 -3"
 
@@ -567,6 +682,22 @@
                 src: #elinka;
                 side: double;
             "
+
+            position="0 0 0.015"
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.08 1.08 1.08;
+                dur: 200;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 200;
+                startEvents: mouseleave;
+            "
         >
         </a-entity>
 
@@ -593,13 +724,29 @@
                 src: #tostao;
                 side: double;
             "
+
+            position="0 0 0.015"
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.08 1.08 1.08;
+                dur: 200;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 200;
+                startEvents: mouseleave;
+            "
         >
         </a-entity>
 
 
 
         <!-- ================================================= -->
-        <!-- INFOGRAFÍA NUEVA -->
+        <!-- INFOGRAFÍA NUEVA FELICIDAD -->
         <!-- ================================================= -->
 
         <a-entity
@@ -618,6 +765,22 @@
                 shader: flat;
                 src: #nueva;
                 side: double;
+            "
+
+            position="0 0 0.015"
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.08 1.08 1.08;
+                dur: 200;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 200;
+                startEvents: mouseleave;
             "
         >
         </a-entity>
@@ -638,6 +801,10 @@
         >
 
 
+            <!-- ============================================= -->
+            <!-- FONDO -->
+            <!-- ============================================= -->
+
             <a-plane
 
                 id="panelBackground"
@@ -656,6 +823,11 @@
             >
             </a-plane>
 
+
+
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA GRANDE -->
+            <!-- ============================================= -->
 
             <a-plane
 
@@ -678,6 +850,11 @@
             </a-plane>
 
 
+
+            <!-- ============================================= -->
+            <!-- TÍTULO -->
+            <!-- ============================================= -->
+
             <a-text
 
                 id="infoTitle"
@@ -694,6 +871,11 @@
             >
             </a-text>
 
+
+
+            <!-- ============================================= -->
+            <!-- BOTÓN CERRAR -->
+            <!-- ============================================= -->
 
             <a-entity
 
@@ -739,27 +921,49 @@
         <!-- ================================================= -->
 
         <a-camera
-            position="0 1.6 0">
+
+            position="0 1.6 0"
+        >
         </a-camera>
 
 
 
         <!-- ================================================= -->
-        <!-- CONTROLES VR -->
+        <!-- CONTROL VR IZQUIERDO -->
         <!-- ================================================= -->
 
         <a-entity
+
             id="leftHand"
+
             laser-controls="hand: left"
-            raycaster="objects: .raycastable">
+
+            raycaster="
+                objects: .raycastable;
+            "
+        >
         </a-entity>
 
 
+
+        <!-- ================================================= -->
+        <!-- CONTROL VR DERECHO -->
+        <!-- ================================================= -->
+
         <a-entity
+
             id="rightHand"
+
             laser-controls="hand: right"
-            raycaster="objects: .raycastable"
-            line="color: #118A7E">
+
+            raycaster="
+                objects: .raycastable;
+            "
+
+            line="
+                color: #118A7E;
+            "
+        >
         </a-entity>
 
 
