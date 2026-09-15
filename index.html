@@ -20,7 +20,7 @@
 
 
     <!-- ================================================= -->
-    <!-- SISTEMA DE INFOGRAFÍAS -->
+    <!-- COMPONENTE DE INFOGRAFÍAS -->
     <!-- ================================================= -->
 
     <script>
@@ -30,7 +30,15 @@
             init: function () {
 
                 /* =================================================
-                   BOTONES DE LAS INFOGRAFÍAS
+                   ELEMENTOS DEL PUESTO
+                ================================================= */
+
+                const puesto =
+                    document.querySelector('#puesto-wonka');
+
+
+                /* =================================================
+                   BOTONES
                 ================================================= */
 
                 const elinkaButton =
@@ -82,7 +90,7 @@
 
 
                 /* =================================================
-                   INFORMACIÓN
+                   INFORMACIÓN DE CADA INFOGRAFÍA
                 ================================================= */
 
                 const infografias = {
@@ -118,7 +126,205 @@
 
 
                 /* =================================================
-                   FUNCIÓN PARA ABRIR
+                   PEGAR INFOGRAFÍAS A LOS CARTELES
+                ================================================= */
+
+                puesto.addEventListener(
+                    'model-loaded',
+                    function () {
+
+                        console.log(
+                            'Puesto 3D cargado correctamente'
+                        );
+
+
+                        /* =========================================
+                           OBTENER MALLA DEL GLB
+                        ========================================= */
+
+                        const modelo =
+                            puesto.getObject3D('mesh');
+
+
+                        if (!modelo) {
+
+                            console.error(
+                                'No se encontró la malla del GLB'
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* =========================================
+                           BUSCAR LOS TRES CARTELES
+                        ========================================= */
+
+                        const cartelElinka =
+                            modelo.getObjectByName(
+                                'CARTEL_ELINKA'
+                            );
+
+                        const cartelTostao =
+                            modelo.getObjectByName(
+                                'CARTEL_TOSTAO'
+                            );
+
+                        const cartelNueva =
+                            modelo.getObjectByName(
+                                'CARTEL_NUEVA_FELICIDAD'
+                            );
+
+
+                        /* =========================================
+                           MOSTRAR RESULTADO EN CONSOLA
+                        ========================================= */
+
+                        console.log(
+                            'CARTEL_ELINKA:',
+                            cartelElinka
+                        );
+
+                        console.log(
+                            'CARTEL_TOSTAO:',
+                            cartelTostao
+                        );
+
+                        console.log(
+                            'CARTEL_NUEVA_FELICIDAD:',
+                            cartelNueva
+                        );
+
+
+                        /* =========================================
+                           ELLINIKA
+                        ========================================= */
+
+                        if (cartelElinka) {
+
+                            cartelElinka.add(
+                                elinkaButton.object3D
+                            );
+
+
+                            elinkaButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            elinkaButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            elinkaButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_ELINKA'
+                            );
+
+                        }
+
+
+                        /* =========================================
+                           TOSTAO
+                        ========================================= */
+
+                        if (cartelTostao) {
+
+                            cartelTostao.add(
+                                tostaoButton.object3D
+                            );
+
+
+                            tostaoButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            tostaoButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            tostaoButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_TOSTAO'
+                            );
+
+                        }
+
+
+                        /* =========================================
+                           NUEVA FELICIDAD
+                        ========================================= */
+
+                        if (cartelNueva) {
+
+                            cartelNueva.add(
+                                nuevaButton.object3D
+                            );
+
+
+                            nuevaButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            nuevaButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            nuevaButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_NUEVA_FELICIDAD'
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* =================================================
+                   FUNCIÓN PARA ABRIR UNA INFOGRAFÍA
                 ================================================= */
 
                 function abrirInfografia(nombre) {
@@ -130,9 +336,9 @@
                         imagenes[nombre];
 
 
-                    /* ===============================
+                    /* =============================================
                        CAMBIAR IMAGEN
-                    =============================== */
+                    ============================================= */
 
                     infoImage.setAttribute(
                         'material',
@@ -141,9 +347,9 @@
                     );
 
 
-                    /* ===============================
+                    /* =============================================
                        CAMBIAR TÍTULO
-                    =============================== */
+                    ============================================= */
 
                     infoTitle.setAttribute(
                         'text',
@@ -152,9 +358,9 @@
                     );
 
 
-                    /* ===============================
+                    /* =============================================
                        MANTENER PROPORCIÓN ORIGINAL
-                    =============================== */
+                    ============================================= */
 
                     if (
                         imagen &&
@@ -162,20 +368,29 @@
                         imagen.naturalHeight
                     ) {
 
-                        const aspectRatio =
+                        const proporcion =
                             imagen.naturalWidth /
                             imagen.naturalHeight;
 
 
+                        /* -----------------------------------------
+                           ALTURA FIJA
+                        ----------------------------------------- */
+
                         const altura = 2.7;
 
+
+                        /* -----------------------------------------
+                           ANCHO CALCULADO
+                        ----------------------------------------- */
+
                         const ancho =
-                            altura * aspectRatio;
+                            altura * proporcion;
 
 
-                        /* ===============================
-                           TAMAÑO DE LA INFOGRAFÍA
-                        =============================== */
+                        /* -----------------------------------------
+                           IMAGEN
+                        ----------------------------------------- */
 
                         infoImage.setAttribute(
                             'geometry',
@@ -187,9 +402,9 @@
                         );
 
 
-                        /* ===============================
+                        /* -----------------------------------------
                            FONDO
-                        =============================== */
+                        ----------------------------------------- */
 
                         panelBackground.setAttribute(
                             'geometry',
@@ -201,9 +416,9 @@
                         );
 
 
-                        /* ===============================
+                        /* -----------------------------------------
                            TÍTULO
-                        =============================== */
+                        ----------------------------------------- */
 
                         infoTitle.setAttribute(
                             'position',
@@ -211,9 +426,9 @@
                         );
 
 
-                        /* ===============================
-                           BOTÓN CERRAR
-                        =============================== */
+                        /* -----------------------------------------
+                           BOTÓN X
+                        ----------------------------------------- */
 
                         closeButton.setAttribute(
                             'position',
@@ -223,9 +438,9 @@
                     }
 
 
-                    /* ===============================
+                    /* =============================================
                        MOSTRAR PANEL
-                    =============================== */
+                    ============================================= */
 
                     infoPanel.setAttribute(
                         'visible',
@@ -236,49 +451,55 @@
 
 
                 /* =================================================
-                   ELLINIKA
+                   CLICK ELLINIKA
                 ================================================= */
 
                 elinkaButton.addEventListener(
                     'click',
                     function () {
 
-                        abrirInfografia('elinka');
+                        abrirInfografia(
+                            'elinka'
+                        );
 
                     }
                 );
 
 
                 /* =================================================
-                   TOSTAO
+                   CLICK TOSTAO
                 ================================================= */
 
                 tostaoButton.addEventListener(
                     'click',
                     function () {
 
-                        abrirInfografia('tostao');
+                        abrirInfografia(
+                            'tostao'
+                        );
 
                     }
                 );
 
 
                 /* =================================================
-                   NUEVA FELICIDAD
+                   CLICK NUEVA FELICIDAD
                 ================================================= */
 
                 nuevaButton.addEventListener(
                     'click',
                     function () {
 
-                        abrirInfografia('nueva');
+                        abrirInfografia(
+                            'nueva'
+                        );
 
                     }
                 );
 
 
                 /* =================================================
-                   CERRAR
+                   CERRAR INFOGRAFÍA
                 ================================================= */
 
                 closeButton.addEventListener(
@@ -304,6 +525,10 @@
 
 <body>
 
+    <!-- ================================================= -->
+    <!-- ESCENA -->
+    <!-- ================================================= -->
+
     <a-scene
 
         infografia-ui
@@ -321,7 +546,9 @@
         <a-assets>
 
 
-            <!-- ==================== VIDEO 360 ==================== -->
+            <!-- ============================================= -->
+            <!-- VIDEO 360 -->
+            <!-- ============================================= -->
 
             <video
 
@@ -340,7 +567,9 @@
             </video>
 
 
-            <!-- ==================== MODELO 3D ==================== -->
+            <!-- ============================================= -->
+            <!-- MODELO 3D -->
+            <!-- ============================================= -->
 
             <a-asset-item
 
@@ -351,7 +580,9 @@
             </a-asset-item>
 
 
-            <!-- ==================== INFOGRAFÍA ELLINIKA ==================== -->
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA ELLINIKA -->
+            <!-- ============================================= -->
 
             <img
 
@@ -363,7 +594,9 @@
             >
 
 
-            <!-- ==================== INFOGRAFÍA TOSTAO ==================== -->
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA TOSTAO -->
+            <!-- ============================================= -->
 
             <img
 
@@ -375,7 +608,9 @@
             >
 
 
-            <!-- ==================== INFOGRAFÍA NUEVA FELICIDAD ==================== -->
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
+            <!-- ============================================= -->
 
             <img
 
@@ -412,6 +647,8 @@
 
         <a-entity
 
+            id="puesto-wonka"
+
             gltf-model="#puesto-wonka"
 
             position="0 0 -3"
@@ -446,9 +683,7 @@
                 side: double;
             "
 
-            position="-2.35 1.00 -3.20"
-
-            rotation="15 -25 0"
+            position="0 0 0.015"
 
             animation__mouseenter="
                 property: scale;
@@ -490,9 +725,7 @@
                 side: double;
             "
 
-            position="-0.55 1.00 -3.20"
-
-            rotation="12 -10 0"
+            position="0 0 0.015"
 
             animation__mouseenter="
                 property: scale;
@@ -534,9 +767,7 @@
                 side: double;
             "
 
-            position="1.35 1.05 -3.20"
-
-            rotation="10 10 0"
+            position="0 0 0.015"
 
             animation__mouseenter="
                 property: scale;
@@ -570,7 +801,9 @@
         >
 
 
-            <!-- ==================== FONDO ==================== -->
+            <!-- ============================================= -->
+            <!-- FONDO -->
+            <!-- ============================================= -->
 
             <a-plane
 
@@ -592,7 +825,9 @@
 
 
 
-            <!-- ==================== IMAGEN ==================== -->
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA GRANDE -->
+            <!-- ============================================= -->
 
             <a-plane
 
@@ -609,13 +844,16 @@
                 material="
                     shader: flat;
                     src: #elinka;
+                    side: double;
                 "
             >
             </a-plane>
 
 
 
-            <!-- ==================== TÍTULO ==================== -->
+            <!-- ============================================= -->
+            <!-- TÍTULO -->
+            <!-- ============================================= -->
 
             <a-text
 
@@ -635,7 +873,9 @@
 
 
 
-            <!-- ==================== BOTÓN CERRAR ==================== -->
+            <!-- ============================================= -->
+            <!-- BOTÓN CERRAR -->
+            <!-- ============================================= -->
 
             <a-entity
 
@@ -689,7 +929,7 @@
 
 
         <!-- ================================================= -->
-        <!-- CONTROL IZQUIERDO -->
+        <!-- CONTROL VR IZQUIERDO -->
         <!-- ================================================= -->
 
         <a-entity
@@ -707,7 +947,7 @@
 
 
         <!-- ================================================= -->
-        <!-- CONTROL DERECHO -->
+        <!-- CONTROL VR DERECHO -->
         <!-- ================================================= -->
 
         <a-entity
