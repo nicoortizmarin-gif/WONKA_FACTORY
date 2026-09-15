@@ -4,6 +4,10 @@
 <head>
 
     <meta charset="utf-8">
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/play-on-click.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/hide-on-play.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/remix-dropdown.js"></script>
 
     <title>Gastronomía Wonka</title>
 
@@ -318,21 +322,17 @@
 
             <!-- ==================== VIDEO 360 ==================== -->
 
-            <video
-
-                id="video"
-
-                preload="auto"
-
-                src="video/video360.mp4"
-
-                autoplay
-
-                loop
-
-                crossorigin="anonymous">
-
-            </video>
+            <video id="video" preload="auto"
+               src="video/video360.mp4"
+               autoplay loop="true"
+               crossOrigin="anonymous"></video>
+      </a-assets>
+      <a-videosphere
+        rotation="0 -90 0"
+        src="#video"
+        visible="false"
+        play-on-click>
+      </a-videosphere>
 
 
             <!-- ==================== MODELO 3D ==================== -->
