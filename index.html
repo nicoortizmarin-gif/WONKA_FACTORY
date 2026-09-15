@@ -20,6 +20,979 @@
 
 
     <!-- ================================================= -->
+    <!-- COMPONENTE DE INFOGRAFÍAS -->
+    <!-- ================================================= -->
+
+    <script>
+
+        AFRAME.registerComponent('infografia-ui', {
+
+            init: function () {
+
+                /* =================================================
+                   ELEMENTOS DEL PUESTO
+                ================================================= */
+
+                const puesto =
+                    document.querySelector('#puesto-wonka');
+
+
+                /* =================================================
+                   BOTONES
+                ================================================= */
+
+                const elinkaButton =
+                    document.querySelector('#elinkaButton');
+
+                const tostaoButton =
+                    document.querySelector('#tostaoButton');
+
+                const nuevaButton =
+                    document.querySelector('#nuevaButton');
+
+
+                /* =================================================
+                   PANEL GRANDE
+                ================================================= */
+
+                const infoPanel =
+                    document.querySelector('#infoPanel');
+
+                const infoImage =
+                    document.querySelector('#infoImage');
+
+                const infoTitle =
+                    document.querySelector('#infoTitle');
+
+                const closeButton =
+                    document.querySelector('#closeButton');
+
+                const panelBackground =
+                    document.querySelector('#panelBackground');
+
+
+                /* =================================================
+                   IMÁGENES
+                ================================================= */
+
+                const imagenes = {
+
+                    elinka:
+                        document.querySelector('#elinka'),
+
+                    tostao:
+                        document.querySelector('#tostao'),
+
+                    nueva:
+                        document.querySelector('#nueva')
+
+                };
+
+
+                /* =================================================
+                   INFORMACIÓN DE CADA INFOGRAFÍA
+                ================================================= */
+
+                const infografias = {
+
+                    elinka: {
+
+                        imagen: '#elinka',
+
+                        titulo:
+                            'DULCES DE MENTA · ELLINIKA'
+
+                    },
+
+                    tostao: {
+
+                        imagen: '#tostao',
+
+                        titulo:
+                            'DULCES DE CAFÉ · TOSTAO'
+
+                    },
+
+                    nueva: {
+
+                        imagen: '#nueva',
+
+                        titulo:
+                            'GALLETAS DE LA SUERTE · NUEVA FELICIDAD'
+
+                    }
+
+                };
+
+
+                /* =================================================
+                   PEGAR INFOGRAFÍAS A LOS CARTELES
+                ================================================= */
+
+                puesto.addEventListener(
+                    'model-loaded',
+                    function () {
+
+                        console.log(
+                            'Puesto 3D cargado correctamente'
+                        );
+
+
+                        /* =========================================
+                           OBTENER MALLA DEL GLB
+                        ========================================= */
+
+                        const modelo =
+                            puesto.getObject3D('mesh');
+
+
+                        if (!modelo) {
+
+                            console.error(
+                                'No se encontró la malla del GLB'
+                            );
+
+                            return;
+
+                        }
+
+
+                        /* =========================================
+                           BUSCAR LOS TRES CARTELES
+                        ========================================= */
+
+                        const cartelElinka =
+                            modelo.getObjectByName(
+                                'CARTEL_ELINKA'
+                            );
+
+                        const cartelTostao =
+                            modelo.getObjectByName(
+                                'CARTEL_TOSTAO'
+                            );
+
+                        const cartelNueva =
+                            modelo.getObjectByName(
+                                'CARTEL_NUEVA_FELICIDAD'
+                            );
+
+
+                        /* =========================================
+                           MOSTRAR RESULTADO EN CONSOLA
+                        ========================================= */
+
+                        console.log(
+                            'CARTEL_ELINKA:',
+                            cartelElinka
+                        );
+
+                        console.log(
+                            'CARTEL_TOSTAO:',
+                            cartelTostao
+                        );
+
+                        console.log(
+                            'CARTEL_NUEVA_FELICIDAD:',
+                            cartelNueva
+                        );
+
+
+                        /* =========================================
+                           ELLINIKA
+                        ========================================= */
+
+                        if (cartelElinka) {
+
+                            cartelElinka.add(
+                                elinkaButton.object3D
+                            );
+
+
+                            elinkaButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            elinkaButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            elinkaButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_ELINKA'
+                            );
+
+                        }
+
+
+                        /* =========================================
+                           TOSTAO
+                        ========================================= */
+
+                        if (cartelTostao) {
+
+                            cartelTostao.add(
+                                tostaoButton.object3D
+                            );
+
+
+                            tostaoButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            tostaoButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            tostaoButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_TOSTAO'
+                            );
+
+                        }
+
+
+                        /* =========================================
+                           NUEVA FELICIDAD
+                        ========================================= */
+
+                        if (cartelNueva) {
+
+                            cartelNueva.add(
+                                nuevaButton.object3D
+                            );
+
+
+                            nuevaButton.object3D.position.set(
+                                0,
+                                0,
+                                0.015
+                            );
+
+
+                            nuevaButton.object3D.rotation.set(
+                                0,
+                                0,
+                                0
+                            );
+
+
+                            nuevaButton.object3D.scale.set(
+                                1,
+                                1,
+                                1
+                            );
+
+                        }
+                        else {
+
+                            console.error(
+                                'No se encontró CARTEL_NUEVA_FELICIDAD'
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* =================================================
+                   FUNCIÓN PARA ABRIR UNA INFOGRAFÍA
+                ================================================= */
+
+                function abrirInfografia(nombre) {
+
+                    const datos =
+                        infografias[nombre];
+
+                    const imagen =
+                        imagenes[nombre];
+
+
+                    /* =============================================
+                       CAMBIAR IMAGEN
+                    ============================================= */
+
+                    infoImage.setAttribute(
+                        'material',
+                        'src',
+                        datos.imagen
+                    );
+
+
+                    /* =============================================
+                       CAMBIAR TÍTULO
+                    ============================================= */
+
+                    infoTitle.setAttribute(
+                        'text',
+                        'value',
+                        datos.titulo
+                    );
+
+
+                    /* =============================================
+                       MANTENER PROPORCIÓN ORIGINAL
+                    ============================================= */
+
+                    if (
+                        imagen &&
+                        imagen.naturalWidth &&
+                        imagen.naturalHeight
+                    ) {
+
+                        const proporcion =
+                            imagen.naturalWidth /
+                            imagen.naturalHeight;
+
+
+                        /* -----------------------------------------
+                           ALTURA FIJA
+                        ----------------------------------------- */
+
+                        const altura = 2.7;
+
+
+                        /* -----------------------------------------
+                           ANCHO CALCULADO
+                        ----------------------------------------- */
+
+                        const ancho =
+                            altura * proporcion;
+
+
+                        /* -----------------------------------------
+                           IMAGEN
+                        ----------------------------------------- */
+
+                        infoImage.setAttribute(
+                            'geometry',
+                            {
+                                primitive: 'plane',
+                                width: ancho,
+                                height: altura
+                            }
+                        );
+
+
+                        /* -----------------------------------------
+                           FONDO
+                        ----------------------------------------- */
+
+                        panelBackground.setAttribute(
+                            'geometry',
+                            {
+                                primitive: 'plane',
+                                width: ancho + 0.45,
+                                height: altura + 0.8
+                            }
+                        );
+
+
+                        /* -----------------------------------------
+                           TÍTULO
+                        ----------------------------------------- */
+
+                        infoTitle.setAttribute(
+                            'position',
+                            `0 ${-(altura / 2 + 0.28)} 0.04`
+                        );
+
+
+                        /* -----------------------------------------
+                           BOTÓN X
+                        ----------------------------------------- */
+
+                        closeButton.setAttribute(
+                            'position',
+                            `${(ancho / 2) - 0.02} ${(altura / 2) + 0.25} 0.05`
+                        );
+
+                    }
+
+
+                    /* =============================================
+                       MOSTRAR PANEL
+                    ============================================= */
+
+                    infoPanel.setAttribute(
+                        'visible',
+                        'true'
+                    );
+
+                }
+
+
+                /* =================================================
+                   CLICK ELLINIKA
+                ================================================= */
+
+                elinkaButton.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirInfografia(
+                            'elinka'
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   CLICK TOSTAO
+                ================================================= */
+
+                tostaoButton.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirInfografia(
+                            'tostao'
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   CLICK NUEVA FELICIDAD
+                ================================================= */
+
+                nuevaButton.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirInfografia(
+                            'nueva'
+                        );
+
+                    }
+                );
+
+
+                /* =================================================
+                   CERRAR INFOGRAFÍA
+                ================================================= */
+
+                closeButton.addEventListener(
+                    'click',
+                    function () {
+
+                        infoPanel.setAttribute(
+                            'visible',
+                            'false'
+                        );
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+
+</head>
+
+
+<body>
+
+    <!-- ================================================= -->
+    <!-- ESCENA -->
+    <!-- ================================================= -->
+
+    <a-scene
+
+        infografia-ui
+
+        cursor="rayOrigin: mouse; fuse: false"
+
+        raycaster="objects: .raycastable"
+    >
+
+
+        <!-- ================================================= -->
+        <!-- RECURSOS -->
+        <!-- ================================================= -->
+
+        <a-assets>
+
+
+            <!-- ============================================= -->
+            <!-- VIDEO 360 -->
+            <!-- ============================================= -->
+
+            <video
+
+                id="video"
+
+                preload="auto"
+
+                src="video/video360.mp4"
+
+                autoplay
+
+                loop
+
+                crossorigin="anonymous"
+            >
+            </video>
+
+
+            <!-- ============================================= -->
+            <!-- MODELO 3D -->
+            <!-- ============================================= -->
+
+            <a-asset-item
+
+                id="puesto-wonka"
+
+                src="modelos/PUESTO_WONKA_3D_FINAL_.glb"
+            >
+            </a-asset-item>
+
+
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA ELLINIKA -->
+            <!-- ============================================= -->
+
+            <img
+
+                id="elinka"
+
+                src="infografias/INFOGRAFIA ELINKA_.png"
+
+                crossorigin="anonymous"
+            >
+
+
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA TOSTAO -->
+            <!-- ============================================= -->
+
+            <img
+
+                id="tostao"
+
+                src="infografias/INFOGRAFIA TOSTAO_.png"
+
+                crossorigin="anonymous"
+            >
+
+
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA NUEVA FELICIDAD -->
+            <!-- ============================================= -->
+
+            <img
+
+                id="nueva"
+
+                src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
+
+                crossorigin="anonymous"
+            >
+
+        </a-assets>
+
+
+
+        <!-- ================================================= -->
+        <!-- VIDEO 360 -->
+        <!-- ================================================= -->
+
+        <a-videosphere
+
+            id="videoSphere"
+
+            rotation="0 -90 0"
+
+            src="#video"
+        >
+        </a-videosphere>
+
+
+
+        <!-- ================================================= -->
+        <!-- PUESTO WONKA 3D -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="puesto-wonka"
+
+            gltf-model="#puesto-wonka"
+
+            position="0 0 -3"
+
+            rotation="0 0 0"
+
+            scale="1 1 1"
+        >
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- INFOGRAFÍA ELLINIKA -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="elinkaButton"
+
+            class="raycastable"
+
+            geometry="
+                primitive: plane;
+                width: 1.25;
+                height: 1.70;
+            "
+
+            material="
+                shader: flat;
+                src: #elinka;
+                side: double;
+            "
+
+            position="0 0 0.015"
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.08 1.08 1.08;
+                dur: 200;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 200;
+                startEvents: mouseleave;
+            "
+        >
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- INFOGRAFÍA TOSTAO -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="tostaoButton"
+
+            class="raycastable"
+
+            geometry="
+                primitive: plane;
+                width: 1.25;
+                height: 1.70;
+            "
+
+            material="
+                shader: flat;
+                src: #tostao;
+                side: double;
+            "
+
+            position="0 0 0.015"
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.08 1.08 1.08;
+                dur: 200;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 200;
+                startEvents: mouseleave;
+            "
+        >
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- INFOGRAFÍA NUEVA FELICIDAD -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="nuevaButton"
+
+            class="raycastable"
+
+            geometry="
+                primitive: plane;
+                width: 1.25;
+                height: 1.70;
+            "
+
+            material="
+                shader: flat;
+                src: #nueva;
+                side: double;
+            "
+
+            position="0 0 0.015"
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.08 1.08 1.08;
+                dur: 200;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 200;
+                startEvents: mouseleave;
+            "
+        >
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- PANEL GRANDE -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="infoPanel"
+
+            visible="false"
+
+            position="0 1.6 -2"
+        >
+
+
+            <!-- ============================================= -->
+            <!-- FONDO -->
+            <!-- ============================================= -->
+
+            <a-plane
+
+                id="panelBackground"
+
+                geometry="
+                    primitive: plane;
+                    width: 3;
+                    height: 3.5;
+                "
+
+                material="
+                    color: #171717;
+                    shader: flat;
+                    opacity: 0.97;
+                "
+            >
+            </a-plane>
+
+
+
+            <!-- ============================================= -->
+            <!-- INFOGRAFÍA GRANDE -->
+            <!-- ============================================= -->
+
+            <a-plane
+
+                id="infoImage"
+
+                position="0 0 0.03"
+
+                geometry="
+                    primitive: plane;
+                    width: 2;
+                    height: 2.7;
+                "
+
+                material="
+                    shader: flat;
+                    src: #elinka;
+                    side: double;
+                "
+            >
+            </a-plane>
+
+
+
+            <!-- ============================================= -->
+            <!-- TÍTULO -->
+            <!-- ============================================= -->
+
+            <a-text
+
+                id="infoTitle"
+
+                value="INFOGRAFÍA"
+
+                align="center"
+
+                width="3"
+
+                color="white"
+
+                position="0 -1.7 0.04"
+            >
+            </a-text>
+
+
+
+            <!-- ============================================= -->
+            <!-- BOTÓN CERRAR -->
+            <!-- ============================================= -->
+
+            <a-entity
+
+                id="closeButton"
+
+                class="raycastable"
+
+                geometry="
+                    primitive: circle;
+                    radius: 0.18;
+                "
+
+                material="
+                    color: #B83232;
+                    shader: flat;
+                "
+
+                position="1.2 1.5 0.05"
+            >
+
+                <a-text
+
+                    value="X"
+
+                    align="center"
+
+                    width="2"
+
+                    color="white"
+
+                    position="0 0 0.01"
+                >
+                </a-text>
+
+            </a-entity>
+
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- CÁMARA -->
+        <!-- ================================================= -->
+
+        <a-camera
+
+            position="0 1.6 0"
+        >
+        </a-camera>
+
+
+
+        <!-- ================================================= -->
+        <!-- CONTROL VR IZQUIERDO -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="leftHand"
+
+            laser-controls="hand: left"
+
+            raycaster="
+                objects: .raycastable;
+            "
+        >
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- CONTROL VR DERECHO -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="rightHand"
+
+            laser-controls="hand: right"
+
+            raycaster="
+                objects: .raycastable;
+            "
+
+            line="
+                color: #118A7E;
+            "
+        >
+        </a-entity>
+
+
+    </a-scene>
+
+</body>
+
+</html><!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Gastronomía Wonka</title>
+
+    <meta
+        name="description"
+        content="Experiencia inmersiva de gastronomía inspirada en Willy Wonka"
+    >
+
+    <!-- ================================================= -->
+    <!-- A-FRAME -->
+    <!-- ================================================= -->
+
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+
+    <!-- ================================================= -->
     <!-- SISTEMA DE INFOGRAFÍAS -->
     <!-- ================================================= -->
 
