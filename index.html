@@ -23,6 +23,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/hide-on-play.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/remix-dropdown.js"></script>
+
 
     <!-- ================================================= -->
     <!-- SISTEMA DE BOTONES -->
@@ -34,9 +36,9 @@
 
             init: function () {
 
-                /* ==========================================
+                /* =================================================
                    BOTONES
-                ========================================== */
+                ================================================= */
 
                 const botonElinka =
                     document.querySelector('#botonElinka');
@@ -48,9 +50,9 @@
                     document.querySelector('#botonNueva');
 
 
-                /* ==========================================
+                /* =================================================
                    PANEL
-                ========================================== */
+                ================================================= */
 
                 const panel =
                     document.querySelector('#panel');
@@ -62,9 +64,9 @@
                     document.querySelector('#cerrar');
 
 
-                /* ==========================================
+                /* =================================================
                    IMÁGENES
-                ========================================== */
+                ================================================= */
 
                 const imagenes = {
 
@@ -77,16 +79,16 @@
                 };
 
 
-                /* ==========================================
+                /* =================================================
                    ABRIR IMAGEN
-                ========================================== */
+                ================================================= */
 
-                function abrirImagen(imagen) {
+                function abrirImagen(nombre) {
 
                     imagenPanel.setAttribute(
                         'material',
                         'src',
-                        imagenes[imagen]
+                        imagenes[nombre]
                     );
 
                     panel.setAttribute(
@@ -97,9 +99,9 @@
                 }
 
 
-                /* ==========================================
-                   BOTÓN ELLINIKA
-                ========================================== */
+                /* =================================================
+                   ELLINIKA
+                ================================================= */
 
                 botonElinka.addEventListener(
                     'click',
@@ -111,9 +113,9 @@
                 );
 
 
-                /* ==========================================
-                   BOTÓN TOSTAO
-                ========================================== */
+                /* =================================================
+                   TOSTAO
+                ================================================= */
 
                 botonTostao.addEventListener(
                     'click',
@@ -125,9 +127,9 @@
                 );
 
 
-                /* ==========================================
-                   BOTÓN NUEVA FELICIDAD
-                ========================================== */
+                /* =================================================
+                   NUEVA FELICIDAD
+                ================================================= */
 
                 botonNueva.addEventListener(
                     'click',
@@ -139,9 +141,9 @@
                 );
 
 
-                /* ==========================================
+                /* =================================================
                    CERRAR
-                ========================================== */
+                ================================================= */
 
                 cerrar.addEventListener(
                     'click',
@@ -183,76 +185,58 @@
         <a-assets>
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- VIDEO 360 -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <video
-
                 id="video"
-
                 preload="auto"
-
                 src="video/video360.mp4"
-
                 loop
-
-                crossorigin="anonymous"
-            >
+                crossorigin="anonymous">
             </video>
 
 
-            <!-- ============================================= -->
-            <!-- MODELO 3D
-            <!-- ============================================= -->
+            <!-- ================================================= -->
+            <!-- MODELO 3D -->
+            <!-- ================================================= -->
 
             <a-asset-item
-
                 id="puesto-wonka-asset"
-
-                src="modelos/PUESTO_WONKA_3D_FINAL_.glb"
-            >
+                src="modelos/PUESTO_WONKA_3D_FINAL_.glb">
             </a-asset-item>
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- IMAGEN ELLINIKA -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <img
-
                 id="elinka"
-
                 src="infografias/INFOGRAFIA ELINKA_.png"
-
                 crossorigin="anonymous"
             >
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- IMAGEN TOSTAO -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <img
-
                 id="tostao"
-
                 src="infografias/INFOGRAFIA TOSTAO_.png"
-
                 crossorigin="anonymous"
             >
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- IMAGEN NUEVA FELICIDAD -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <img
-
                 id="nueva"
-
                 src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
-
                 crossorigin="anonymous"
             >
 
@@ -265,37 +249,25 @@
         <!-- ================================================= -->
 
         <a-videosphere
-
             id="videoSphere"
-
             rotation="0 -90 0"
-
             src="#video"
-
             visible="false"
-
-            play-on-click
-        >
+            play-on-click>
         </a-videosphere>
 
 
 
         <!-- ================================================= -->
-        <!-- PUESTO WONKA
+        <!-- PUESTO WONKA 3D -->
         <!-- ================================================= -->
 
         <a-entity
-
             id="puesto-wonka"
-
             gltf-model="#puesto-wonka-asset"
-
             position="0 0 -3"
-
             rotation="0 0 0"
-
-            scale="1 1 1"
-        >
+            scale="1 1 1">
         </a-entity>
 
 
@@ -305,14 +277,10 @@
         <!-- ================================================= -->
 
         <a-camera
-
-            position="0 1.6 0"
-        >
+            position="0 1.6 0">
 
             <a-entity
-
                 position="0 0 -1.5"
-
                 text="
                     align: center;
                     width: 5;
@@ -320,64 +288,166 @@
                     color: white;
                     value: CLICK O TOCA PARA COMENZAR;
                 "
-
-                hide-on-play="#video"
-            >
+                hide-on-play="#video">
             </a-entity>
 
         </a-camera>
 
 
 
-<!-- BOTÓN ELLINIKA -->
-<a-entity
-    id="botonElinka"
-    class="raycastable"
-    position="-2.8 1.25 -4.5"
-    geometry="primitive: circle; radius: 0.16;"
-    material="shader: flat; color: #1687D9;">
-    <a-text
-        value="i"
-        align="center"
-        width="2"
-        color="white"
-        position="0 0 0.01">
-    </a-text>
-</a-entity>
+        <!-- ================================================= -->
+        <!-- BOTONES DE LOS TRES PUESTOS -->
+        <!--
+             ESTE CONTENEDOR USA EL MISMO ORIGEN DEL GLB
+             position="0 0 -3"
+        -->
+        <!-- ================================================= -->
+
+        <a-entity
+            id="botonesPuestos"
+            position="0 0 -3">
 
 
-<!-- BOTÓN TOSTAO -->
-<a-entity
-    id="botonTostao"
-    class="raycastable"
-    position="0 1.45 -5.6"
-    geometry="primitive: circle; radius: 0.16;"
-    material="shader: flat; color: #D49A32;">
-    <a-text
-        value="i"
-        align="center"
-        width="2"
-        color="white"
-        position="0 0 0.01">
-    </a-text>
-</a-entity>
+            <!-- ================================================= -->
+            <!-- BOTÓN ELLINIKA - PUESTO IZQUIERDO -->
+            <!-- ================================================= -->
+
+            <a-entity
+                id="botonElinka"
+                class="raycastable"
+
+                position="-3.5 1.35 -0.8"
+
+                geometry="
+                    primitive: circle;
+                    radius: 0.18;
+                "
+
+                material="
+                    shader: flat;
+                    color: #1687D9;
+                "
+
+                animation__mouseenter="
+                    property: scale;
+                    to: 1.3 1.3 1.3;
+                    dur: 150;
+                    startEvents: mouseenter;
+                "
+
+                animation__mouseleave="
+                    property: scale;
+                    to: 1 1 1;
+                    dur: 150;
+                    startEvents: mouseleave;
+                "
+            >
+
+                <a-text
+                    value="i"
+                    align="center"
+                    width="2"
+                    color="white"
+                    position="0 0 0.01">
+                </a-text>
+
+            </a-entity>
 
 
-<!-- BOTÓN NUEVA FELICIDAD -->
-<a-entity
-    id="botonNueva"
-    class="raycastable"
-    position="2.7 1.25 -4.5"
-    geometry="primitive: circle; radius: 0.16;"
-    material="shader: flat; color: #E25555;">
-    <a-text
-        value="i"
-        align="center"
-        width="2"
-        color="white"
-        position="0 0 0.01">
-    </a-text>
-</a-entity>
+
+            <!-- ================================================= -->
+            <!-- BOTÓN TOSTAO - PUESTO TRASERO -->
+            <!-- ================================================= -->
+
+            <a-entity
+                id="botonTostao"
+                class="raycastable"
+
+                position="0 1.65 -4.0"
+
+                geometry="
+                    primitive: circle;
+                    radius: 0.18;
+                "
+
+                material="
+                    shader: flat;
+                    color: #D49A32;
+                "
+
+                animation__mouseenter="
+                    property: scale;
+                    to: 1.3 1.3 1.3;
+                    dur: 150;
+                    startEvents: mouseenter;
+                "
+
+                animation__mouseleave="
+                    property: scale;
+                    to: 1 1 1;
+                    dur: 150;
+                    startEvents: mouseleave;
+                "
+            >
+
+                <a-text
+                    value="i"
+                    align="center"
+                    width="2"
+                    color="white"
+                    position="0 0 0.01">
+                </a-text>
+
+            </a-entity>
+
+
+
+            <!-- ================================================= -->
+            <!-- BOTÓN NUEVA FELICIDAD - PUESTO DERECHO -->
+            <!-- ================================================= -->
+
+            <a-entity
+                id="botonNueva"
+                class="raycastable"
+
+                position="3.5 1.35 -0.8"
+
+                geometry="
+                    primitive: circle;
+                    radius: 0.18;
+                "
+
+                material="
+                    shader: flat;
+                    color: #E25555;
+                "
+
+                animation__mouseenter="
+                    property: scale;
+                    to: 1.3 1.3 1.3;
+                    dur: 150;
+                    startEvents: mouseenter;
+                "
+
+                animation__mouseleave="
+                    property: scale;
+                    to: 1 1 1;
+                    dur: 150;
+                    startEvents: mouseleave;
+                "
+            >
+
+                <a-text
+                    value="i"
+                    align="center"
+                    width="2"
+                    color="white"
+                    position="0 0 0.01">
+                </a-text>
+
+            </a-entity>
+
+        </a-entity>
 
 
 
@@ -386,67 +456,55 @@
         <!-- ================================================= -->
 
         <a-entity
-
             id="panel"
-
             visible="false"
-
-            position="0 1.6 -2.5"
-        >
+            position="0 1.6 -2.5">
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- FONDO -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <a-plane
-
                 width="3.4"
-
                 height="3.8"
 
                 material="
                     shader: flat;
                     color: #111111;
                     opacity: 0.96;
-                "
-            >
+                ">
             </a-plane>
 
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- IMAGEN -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <a-plane
-
                 id="imagenPanel"
 
                 position="0 0 0.02"
 
                 width="2.6"
-
                 height="3.1"
 
                 material="
                     shader: flat;
                     src: #elinka;
                     side: double;
-                "
-            >
+                ">
             </a-plane>
 
 
 
-            <!-- ============================================= -->
+            <!-- ================================================= -->
             <!-- BOTÓN CERRAR -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
 
             <a-entity
-
                 id="cerrar"
-
                 class="raycastable"
 
                 position="1.48 1.65 0.05"
@@ -463,21 +521,14 @@
             >
 
                 <a-text
-
                     value="X"
-
                     align="center"
-
                     width="2"
-
                     color="white"
-
-                    position="0 0 0.01"
-                >
+                    position="0 0 0.01">
                 </a-text>
 
             </a-entity>
-
 
         </a-entity>
 
@@ -488,15 +539,13 @@
         <!-- ================================================= -->
 
         <a-entity
-
             id="leftHand"
 
             laser-controls="hand: left"
 
             raycaster="
                 objects: .raycastable;
-            "
-        >
+            ">
         </a-entity>
 
 
@@ -506,7 +555,6 @@
         <!-- ================================================= -->
 
         <a-entity
-
             id="rightHand"
 
             laser-controls="hand: right"
@@ -517,8 +565,7 @@
 
             line="
                 color: #118A7E;
-            "
-        >
+            ">
         </a-entity>
 
 
