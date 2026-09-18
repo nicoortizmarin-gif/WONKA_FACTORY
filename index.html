@@ -9,9 +9,12 @@
 
     <meta
         name="description"
-        content="Experiencia inmersiva de gastronomía inspirada en Willy Wonka">
+        content="Experiencia inmersiva de gastronomía inspirada en Willy Wonka"
+    >
 
-    <!-- ==================== A-FRAME ==================== -->
+    <!-- ================================================= -->
+    <!-- A-FRAME -->
+    <!-- ================================================= -->
 
     <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
 
@@ -20,12 +23,157 @@
 
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/hide-on-play.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@gh-pages/examples/js/remix-dropdown.js"></script>
+
+    <!-- ================================================= -->
+    <!-- SISTEMA DE BOTONES -->
+    <!-- ================================================= -->
+
+    <script>
+
+        AFRAME.registerComponent('gastronomia-ui', {
+
+            init: function () {
+
+                /* ==========================================
+                   BOTONES
+                ========================================== */
+
+                const botonElinka =
+                    document.querySelector('#botonElinka');
+
+                const botonTostao =
+                    document.querySelector('#botonTostao');
+
+                const botonNueva =
+                    document.querySelector('#botonNueva');
 
 
+                /* ==========================================
+                   PANEL
+                ========================================== */
+
+                const panel =
+                    document.querySelector('#panel');
+
+                const imagenPanel =
+                    document.querySelector('#imagenPanel');
+
+                const cerrar =
+                    document.querySelector('#cerrar');
 
 
-   <a-scene
+                /* ==========================================
+                   IMÁGENES
+                ========================================== */
+
+                const imagenes = {
+
+                    elinka: '#elinka',
+
+                    tostao: '#tostao',
+
+                    nueva: '#nueva'
+
+                };
+
+
+                /* ==========================================
+                   ABRIR IMAGEN
+                ========================================== */
+
+                function abrirImagen(imagen) {
+
+                    imagenPanel.setAttribute(
+                        'material',
+                        'src',
+                        imagenes[imagen]
+                    );
+
+                    panel.setAttribute(
+                        'visible',
+                        'true'
+                    );
+
+                }
+
+
+                /* ==========================================
+                   BOTÓN ELLINIKA
+                ========================================== */
+
+                botonElinka.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirImagen('elinka');
+
+                    }
+                );
+
+
+                /* ==========================================
+                   BOTÓN TOSTAO
+                ========================================== */
+
+                botonTostao.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirImagen('tostao');
+
+                    }
+                );
+
+
+                /* ==========================================
+                   BOTÓN NUEVA FELICIDAD
+                ========================================== */
+
+                botonNueva.addEventListener(
+                    'click',
+                    function () {
+
+                        abrirImagen('nueva');
+
+                    }
+                );
+
+
+                /* ==========================================
+                   CERRAR
+                ========================================== */
+
+                cerrar.addEventListener(
+                    'click',
+                    function () {
+
+                        panel.setAttribute(
+                            'visible',
+                            'false'
+                        );
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+
+</head>
+
+
+<body>
+
+    <a-scene
+
+        gastronomia-ui
+
+        cursor="rayOrigin: mouse; fuse: false"
+
+        raycaster="objects: .raycastable"
+    >
 
 
         <!-- ================================================= -->
@@ -35,30 +183,421 @@
         <a-assets>
 
 
-            <!-- ==================== VIDEO 360 ==================== -->
+            <!-- ============================================= -->
+            <!-- VIDEO 360 -->
+            <!-- ============================================= -->
 
             <video
+
                 id="video"
+
                 preload="auto"
+
                 src="video/video360.mp4"
+
                 loop
-                crossorigin="anonymous">
+
+                crossorigin="anonymous"
+            >
             </video>
 
 
-            <!-- ==================== MODELO 3D ==================== -->
+            <!-- ============================================= -->
+            <!-- MODELO 3D
+            <!-- ============================================= -->
 
             <a-asset-item
 
-                id="puesto-wonka"
+                id="puesto-wonka-asset"
 
-                src="modelos/PUESTO_WONKA_3D_FINAL_.glb">
-
+                src="modelos/PUESTO_WONKA_3D_FINAL_.glb"
+            >
             </a-asset-item>
 
 
+            <!-- ============================================= -->
+            <!-- IMAGEN ELLINIKA -->
+            <!-- ============================================= -->
+
+            <img
+
+                id="elinka"
+
+                src="infografias/INFOGRAFIA ELINKA_.png"
+
+                crossorigin="anonymous"
+            >
+
+
+            <!-- ============================================= -->
+            <!-- IMAGEN TOSTAO -->
+            <!-- ============================================= -->
+
+            <img
+
+                id="tostao"
+
+                src="infografias/INFOGRAFIA TOSTAO_.png"
+
+                crossorigin="anonymous"
+            >
+
+
+            <!-- ============================================= -->
+            <!-- IMAGEN NUEVA FELICIDAD -->
+            <!-- ============================================= -->
+
+            <img
+
+                id="nueva"
+
+                src="infografias/INFOGRAFIA NUEVA_FELICIDAD_.png"
+
+                crossorigin="anonymous"
+            >
+
+        </a-assets>
+
+
+
         <!-- ================================================= -->
-        <!-- CONTROLES VR -->
+        <!-- VIDEO 360 -->
+        <!-- ================================================= -->
+
+        <a-videosphere
+
+            id="videoSphere"
+
+            rotation="0 -90 0"
+
+            src="#video"
+
+            visible="false"
+
+            play-on-click
+        >
+        </a-videosphere>
+
+
+
+        <!-- ================================================= -->
+        <!-- PUESTO WONKA
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="puesto-wonka"
+
+            gltf-model="#puesto-wonka-asset"
+
+            position="0 0 -3"
+
+            rotation="0 0 0"
+
+            scale="1 1 1"
+        >
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- MENSAJE INICIAL -->
+        <!-- ================================================= -->
+
+        <a-camera
+
+            position="0 1.6 0"
+        >
+
+            <a-entity
+
+                position="0 0 -1.5"
+
+                text="
+                    align: center;
+                    width: 5;
+                    wrapCount: 80;
+                    color: white;
+                    value: CLICK O TOCA PARA COMENZAR;
+                "
+
+                hide-on-play="#video"
+            >
+            </a-entity>
+
+        </a-camera>
+
+
+
+        <!-- ================================================= -->
+        <!-- BOTÓN ELLINIKA
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="botonElinka"
+
+            class="raycastable"
+
+            position="-1.85 1.25 -3.25"
+
+            geometry="
+                primitive: circle;
+                radius: 0.16;
+            "
+
+            material="
+                shader: flat;
+                color: #1687D9;
+            "
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.25 1.25 1.25;
+                dur: 150;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 150;
+                startEvents: mouseleave;
+            "
+        >
+
+            <a-text
+
+                value="i"
+
+                align="center"
+
+                width="2"
+
+                color="white"
+
+                position="0 0 0.01"
+            >
+            </a-text>
+
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- BOTÓN TOSTAO
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="botonTostao"
+
+            class="raycastable"
+
+            position="0 1.55 -4.05"
+
+            geometry="
+                primitive: circle;
+                radius: 0.16;
+            "
+
+            material="
+                shader: flat;
+                color: #D49A32;
+            "
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.25 1.25 1.25;
+                dur: 150;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 150;
+                startEvents: mouseleave;
+            "
+        >
+
+            <a-text
+
+                value="i"
+
+                align="center"
+
+                width="2"
+
+                color="white"
+
+                position="0 0 0.01"
+            >
+            </a-text>
+
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- BOTÓN NUEVA FELICIDAD
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="botonNueva"
+
+            class="raycastable"
+
+            position="1.55 1.30 -3.25"
+
+            geometry="
+                primitive: circle;
+                radius: 0.16;
+            "
+
+            material="
+                shader: flat;
+                color: #E25555;
+            "
+
+            animation__mouseenter="
+                property: scale;
+                to: 1.25 1.25 1.25;
+                dur: 150;
+                startEvents: mouseenter;
+            "
+
+            animation__mouseleave="
+                property: scale;
+                to: 1 1 1;
+                dur: 150;
+                startEvents: mouseleave;
+            "
+        >
+
+            <a-text
+
+                value="i"
+
+                align="center"
+
+                width="2"
+
+                color="white"
+
+                position="0 0 0.01"
+            >
+            </a-text>
+
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- PANEL DE IMAGEN -->
+        <!-- ================================================= -->
+
+        <a-entity
+
+            id="panel"
+
+            visible="false"
+
+            position="0 1.6 -2.5"
+        >
+
+
+            <!-- ============================================= -->
+            <!-- FONDO -->
+            <!-- ============================================= -->
+
+            <a-plane
+
+                width="3.4"
+
+                height="3.8"
+
+                material="
+                    shader: flat;
+                    color: #111111;
+                    opacity: 0.96;
+                "
+            >
+            </a-plane>
+
+
+
+            <!-- ============================================= -->
+            <!-- IMAGEN -->
+            <!-- ============================================= -->
+
+            <a-plane
+
+                id="imagenPanel"
+
+                position="0 0 0.02"
+
+                width="2.6"
+
+                height="3.1"
+
+                material="
+                    shader: flat;
+                    src: #elinka;
+                    side: double;
+                "
+            >
+            </a-plane>
+
+
+
+            <!-- ============================================= -->
+            <!-- BOTÓN CERRAR -->
+            <!-- ============================================= -->
+
+            <a-entity
+
+                id="cerrar"
+
+                class="raycastable"
+
+                position="1.48 1.65 0.05"
+
+                geometry="
+                    primitive: circle;
+                    radius: 0.18;
+                "
+
+                material="
+                    shader: flat;
+                    color: #B83232;
+                "
+            >
+
+                <a-text
+
+                    value="X"
+
+                    align="center"
+
+                    width="2"
+
+                    color="white"
+
+                    position="0 0 0.01"
+                >
+                </a-text>
+
+            </a-entity>
+
+
+        </a-entity>
+
+
+
+        <!-- ================================================= -->
+        <!-- CONTROL VR IZQUIERDO -->
         <!-- ================================================= -->
 
         <a-entity
@@ -69,11 +608,15 @@
 
             raycaster="
                 objects: .raycastable;
-            ">
-
+            "
+        >
         </a-entity>
 
 
+
+        <!-- ================================================= -->
+        <!-- CONTROL VR DERECHO -->
+        <!-- ================================================= -->
 
         <a-entity
 
@@ -87,8 +630,8 @@
 
             line="
                 color: #118A7E;
-            ">
-
+            "
+        >
         </a-entity>
 
 
